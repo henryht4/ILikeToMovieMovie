@@ -12,13 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mysql.jdbc.ResultSetMetaData;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * Servlet implementation class MovieServlet
  */
@@ -71,16 +64,6 @@ public class MovieServlet extends HttpServlet {
         	String query = "SELECT m.id, m.title, m.year, m.director, r.rating "
         			+ "FROM movies m, ratings r "
         			+ "WHERE m.id = r.movieId ORDER BY r.rating DESC LIMIT 20 ";
-        	
-
-        			
-        	//String StarQuery = "SELECT m.id, s.name"
-        	//		+ "FROM movies m, stars_in_movies sl, stars s ("
-    		//			+ "SELECT m.id"
-    		//			+ "FROM movies m, ratings r"
-    		//			+ "WHERE m.id = r.movieId and r.movieId = m.id ORDER BY r.rating DESC LIMIT 20)sub"
-    		//		+"WHERE m.id = sub.id and sl.movieId = m.id and sl.starId = s.id";
-        
         	
         	//execute query
         	ResultSet resultSet = statement.executeQuery(query);      	
