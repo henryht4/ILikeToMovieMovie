@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /**
  * Servlet implementation class MovieServlet
  */
@@ -46,9 +47,34 @@ public class MovieServlet extends HttpServlet {
         //get writer
         PrintWriter out = response.getWriter();
         
-    
+        
         out.println("<html>");
-        out.println("<head><title>I Like to Movie Movie</title></head>");
+        
+        out.println("<img src=\"http://i64.tinypic.com/2wd3jo4.png\" style=\"width:auto;height:60px;\">");  
+        
+        out.println("<div class=\"w3-bar w3-black w3-padding-20\">");
+
+
+        out.println("<a href=\"#\" class=\"w3-bar-item w3-button \">Home</a>");
+        out.println("<a href=\"#\" class=\"w3-bar-item w3-button\">About</a>");
+        out.println("<a href=\"#\" class=\"w3-bar-item w3-button\">Contact</a>");
+
+		out.println("<center>");
+
+		out.println("</center>");
+
+        out.println("</div>");
+        
+        
+        out.println("<head>");
+        
+        
+        out.println("<link rel=\"stylesheet\" href=\"style.css\">");
+        out.println("<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">");
+
+        
+        out.println("<title>I Like to Movie Movie</title></head>");
+        
         
         try {
         	Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -65,12 +91,20 @@ public class MovieServlet extends HttpServlet {
         			+ "FROM movies m, ratings r "
         			+ "WHERE m.id = r.movieId ORDER BY r.rating DESC LIMIT 20 ";
         	
+
+        	
         	//execute query
         	ResultSet resultSet = statement.executeQuery(query);      	
+ 
         	
+    		out.println("<center>");
+
         	out.println("<body>");
+
+
         	out.println("<h1>Top 20 Movie Ratings</h1>");
-        	out.println("<table border>");
+
+        	out.println("<table>");
         	
         	//add table header
         	out.println("<tr>");
@@ -127,7 +161,7 @@ public class MovieServlet extends HttpServlet {
         		ResultSet StarSet = StarsStatement.executeQuery(StarQuery);
         		
         		while(StarSet.next()) {
-        			movieListOfStars = movieListOfStars + StarSet.getString(1) + " ";
+        			movieListOfStars = movieListOfStars + StarSet.getString(1) + ", ";
         		}
         		
         		
@@ -148,12 +182,12 @@ public class MovieServlet extends HttpServlet {
     		out.println("</table>");
     		
     		out.println("</body>");
+    		
+    		out.println("</center>");
+
     	
     		resultSet.close();
-    		
-    		//StarSet.close();
     		statement.close();
-    		//StarStatement.close();
     		connection.close();
     		
         } catch (Exception e) {
