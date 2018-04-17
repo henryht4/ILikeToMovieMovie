@@ -4,7 +4,21 @@
   <artifactId>Project1</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
+  <dependencies>
+    <dependency>
+    	  <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.46</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.0</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
   <build>
+  <finalName>project1</finalName>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
