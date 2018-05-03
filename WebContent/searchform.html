@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+  <head>
+    <meta charset="UTF-8">
+  	<meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Search Form</title>
+  </head>
+  
+  <body>
+  	<h1 ALIGN = "left">Search by Movie Title</h1>
+  	
+  	<form ACTION = "titleresult" METHOD ="GET">
+  		<H3>Enter Title: </H3><br>
+  		<input TYPE="TEXT" name="title" value = "Jurassic%"> (Use % to replace any strings. e.g. Jurassic%)<br>
+  		<input TYPE="SUBMIT" Value="Search Title">
+  	</form>
+  	
+  	<h1 ALIGN = "left">Search by Movie Year</h1>
+  	<form ACTION = "yearresult" METHOD ="GET">	
+  		<H3>Enter Year: </H3><br>  	
+  		<input TYPE="TEXT" name="year" value = 2017><br>  	
+  		<input TYPE="SUBMIT" Value="Search By Year">
+  	</form>
+  	
+  	<h1 ALIGN = "left">Search by Movie Director</h1>
+  	<form ACTION = "directorresult" METHOD ="GET">	
+  		<H3>Enter Director Name: </H3><br>  	
+  		<input TYPE="TEXT" name="director" value = Neil%><br>  	
+  		<input TYPE="SUBMIT" Value="Search By Director">
+  	</form>
+  	
+  	<h1 ALIGN = "left">Search by Movie Star</h1>
+  	<form ACTION = "moviebystarresult" METHOD ="GET">	
+  		<H3>Enter Star's Name: </H3><br>  	
+  		<input TYPE="TEXT" name="star" value = Jackie%><br>  	
+  		<input TYPE="SUBMIT" Value="Search By Star">
+  	</form>
+  	
+ </body>
+</html>
