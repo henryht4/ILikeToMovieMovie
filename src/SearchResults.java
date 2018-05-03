@@ -103,21 +103,60 @@ public class SearchResults extends HttpServlet {
             out.println("<table border>");
 
             // Iterate through each row of rs and create a table row <tr>
-            out.println("<tr><td>ID</td><td>Title</td><td>Year</td><td>Director</td>");
+            out.println("<tr><td>ID</td><td>Title</td><td>Year</td><td>Director</td><td>Genres</td><td>Stars</td>");
            
             while (rs.next()) {
                 String movieID = rs.getString("id");
                 String movieTitle = rs.getString("title");
                 String movieYear = rs.getString("year");
                 String movieDirector = rs.getString("director");
-           
-                out.println(String.format("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", movieID, movieTitle,movieYear,movieDirector));
-
-            
+                
+             
+                //create genre statement
+                String ListOfGenres = "";
+                Statement GenreStatement = dbCon.createStatement();
+                
+                //Create Genre Query
+        		String GenreQuery = String.format("select g.name from movies m, genres_in_movies gl, genres g where gl.genreId = g.id and gl.movieId = '%s' and m.id = '%s'",movieID,movieID);
+        					
+        		//execute GenreQuery to make set
+        		ResultSet GenreSet = GenreStatement.executeQuery(GenreQuery);
+        		
+        		while(GenreSet.next()) {
+        			ListOfGenres = ListOfGenres + GenreSet.getString(1) + " ";
+        		}
+        		
+        		//List of Stars creation
+        		String ListOfStars = "";
+        		
+        		//create Stars Statement
+        		Statement StarsStatement = dbCon.createStatement();
+        		
+        		//Create Star Query
+        		String StarQuery = String.format("select s.name from movies m, stars_in_movies sl, stars s where sl.starId = s.id and sl.movieId = '%s' and m.id = '%s'",movieID,movieID);
+			
+        				//String.format("SELECT s.name"
+        				//+ "FROM movies m, stars_in_movies sl, stars s"
+        				//+ "WHERE sl.starId = s.id and sl.movieId = '%s' and m.id = '%s'", movieID, movieID);
+        				
+        		//execute StarQuery to make set
+        		ResultSet StarSet = StarsStatement.executeQuery(StarQuery);
+        		
+        		while(StarSet.next()) {
+        			ListOfStars = ListOfStars + StarSet.getString(1) + ", ";
+        		}
+        		
+        		
+                out.println(String.format("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", movieID, movieTitle,movieYear,movieDirector, ListOfGenres,ListOfStars));
+                
+                StarSet.close();
+                StarsStatement.close();
+                GenreSet.close();
+                GenreStatement.close();
             }
+            
             out.println("</table>");
-
-
+            
             // Close all structures
             rs.close();
             statement.close();
@@ -141,8 +180,6 @@ public class SearchResults extends HttpServlet {
         // Building page head with title
         out.println("<html><head><title>Movie Titles By Year Found:</title></head>");
 
-        // Building page body
-        out.println("<body><h1>Movie Titles By Year Found:</h1>");
 
 
         try {
@@ -155,7 +192,11 @@ public class SearchResults extends HttpServlet {
 
             // Retrieve parameter "name" from the http request, which refers to the value of <input name="name"> in index.html
             String year = request.getParameter("year");
+            
 
+            // Building page body
+            out.println(String.format("<body><h1>Movies made in the Year %s</h1>", year));
+            
             // Generate a SQL query
             String query = String.format("SELECT * FROM movies WHERE year = '%s'", year);
            
@@ -174,13 +215,47 @@ public class SearchResults extends HttpServlet {
                 String movieYear = rs.getString("year");
                 String movieDirector = rs.getString("director");
            
-                out.println(String.format("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", movieID, movieTitle,movieYear,movieDirector));
-
-            
+              //create genre statement
+                String ListOfGenres = "";
+                Statement GenreStatement = dbCon.createStatement();
+                
+                //Create Genre Query
+        		String GenreQuery = String.format("select g.name from movies m, genres_in_movies gl, genres g where gl.genreId = g.id and gl.movieId = '%s' and m.id = '%s'",movieID,movieID);
+        					
+        		//execute GenreQuery to make set
+        		ResultSet GenreSet = GenreStatement.executeQuery(GenreQuery);
+        		
+        		while(GenreSet.next()) {
+        			ListOfGenres = ListOfGenres + GenreSet.getString(1) + " ";
+        		}
+        		
+        		//List of Stars creation
+        		String ListOfStars = "";
+        		
+        		//create Stars Statement
+        		Statement StarsStatement = dbCon.createStatement();
+        		
+        		//Create Star Query
+        		String StarQuery = String.format("select s.name from movies m, stars_in_movies sl, stars s where sl.starId = s.id and sl.movieId = '%s' and m.id = '%s'",movieID,movieID);
+			
+        		//execute StarQuery to make set
+        		ResultSet StarSet = StarsStatement.executeQuery(StarQuery);
+        		
+        		while(StarSet.next()) {
+        			ListOfStars = ListOfStars + StarSet.getString(1) + ", ";
+        		}
+        		
+        		
+                out.println(String.format("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", movieID, movieTitle,movieYear,movieDirector, ListOfGenres,ListOfStars));
+                
+                
+                StarSet.close();
+                StarsStatement.close();
+                GenreSet.close();
+                GenreStatement.close();
             }
+            
             out.println("</table>");
-
-
             // Close all structures
             rs.close();
             statement.close();
@@ -238,9 +313,44 @@ public class SearchResults extends HttpServlet {
                 String movieYear = rs.getString("year");
                 String movieDirector = rs.getString("director");
            
-                out.println(String.format("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", movieID, movieTitle,movieYear,movieDirector));
-
-            
+                //create genre statement
+                String ListOfGenres = "";
+                Statement GenreStatement = dbCon.createStatement();
+                
+                //Create Genre Query
+        		String GenreQuery = String.format("select g.name from movies m, genres_in_movies gl, genres g where gl.genreId = g.id and gl.movieId = '%s' and m.id = '%s'",movieID,movieID);
+        					
+        		//execute GenreQuery to make set
+        		ResultSet GenreSet = GenreStatement.executeQuery(GenreQuery);
+        		
+        		while(GenreSet.next()) {
+        			ListOfGenres = ListOfGenres + GenreSet.getString(1) + " ";
+        		}
+        		
+        		//List of Stars creation
+        		String ListOfStars = "";
+        		
+        		//create Stars Statement
+        		Statement StarsStatement = dbCon.createStatement();
+        		
+        		//Create Star Query
+        		String StarQuery = String.format("select s.name from movies m, stars_in_movies sl, stars s where sl.starId = s.id and sl.movieId = '%s' and m.id = '%s'",movieID,movieID);
+			
+        		//execute StarQuery to make set
+        		ResultSet StarSet = StarsStatement.executeQuery(StarQuery);
+        		
+        		while(StarSet.next()) {
+        			ListOfStars = ListOfStars + StarSet.getString(1) + ", ";
+        		}
+        		
+        		
+                out.println(String.format("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", movieID, movieTitle,movieYear,movieDirector, ListOfGenres,ListOfStars));
+                
+                
+                StarSet.close();
+                StarsStatement.close();
+                GenreSet.close();
+                GenreStatement.close();
             }
             out.println("</table>");
 
@@ -281,7 +391,7 @@ public class SearchResults extends HttpServlet {
             String star = request.getParameter("star");
            
             // Generate a SQL query
-            String query = String.format(" SELECT s.name, m.title, m.year,m.director "
+            String query = String.format(" SELECT s.name, m.id, m.title, m.year,m.director "
             		+ "FROM movies m, stars s, stars_in_movies sl "
             		+ "WHERE m.id = sl.movieId and sl.starId = s.id and s.name like '%s'", star);
            
@@ -300,13 +410,49 @@ public class SearchResults extends HttpServlet {
            
             while (rs.next()) {
                 String movieStar = rs.getString("name");
+                String movieID = rs.getString("id");
                 String movieTitle = rs.getString("title");
                 String movieYear = rs.getString("year");
                 String movieDirector = rs.getString("director");
            
-                out.println(String.format("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", movieStar, movieTitle,movieYear,movieDirector));
-
-            
+              //create genre statement
+                String ListOfGenres = "";
+                Statement GenreStatement = dbCon.createStatement();
+                
+                //Create Genre Query
+        		String GenreQuery = String.format("select g.name from movies m, genres_in_movies gl, genres g where gl.genreId = g.id and gl.movieId = '%s' and m.id = '%s'",movieID,movieID);
+        					
+        		//execute GenreQuery to make set
+        		ResultSet GenreSet = GenreStatement.executeQuery(GenreQuery);
+        		
+        		while(GenreSet.next()) {
+        			ListOfGenres = ListOfGenres + GenreSet.getString(1) + " ";
+        		}
+        		
+        		//List of Stars creation
+        		String ListOfStars = "";
+        		
+        		//create Stars Statement
+        		Statement StarsStatement = dbCon.createStatement();
+        		
+        		//Create Star Query
+        		String StarQuery = String.format("select s.name from movies m, stars_in_movies sl, stars s where sl.starId = s.id and sl.movieId = '%s' and m.id = '%s'",movieID,movieID);
+			
+        		//execute StarQuery to make set
+        		ResultSet StarSet = StarsStatement.executeQuery(StarQuery);
+        		
+        		while(StarSet.next()) {
+        			ListOfStars = ListOfStars + StarSet.getString(1) + ", ";
+        		}
+        		
+        		
+                out.println(String.format("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", movieID, movieTitle,movieYear,movieDirector, ListOfGenres,ListOfStars));
+                
+                
+                StarSet.close();
+                StarsStatement.close();
+                GenreSet.close();
+                GenreStatement.close();
             }
             out.println("</table>");
 

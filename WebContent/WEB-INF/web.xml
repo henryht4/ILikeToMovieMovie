@@ -40,5 +40,17 @@
 	<url-pattern>/directorresult</url-pattern>
 	<url-pattern>/moviebystarresult</url-pattern>
 </servlet-mapping>
+
+<servlet>
+	<servlet-name>BrowseResults</servlet-name>
+	<servlet-class>BrowseResults</servlet-class>
+</servlet>
+
+<servlet-mapping>
+	<servlet-name>BrowseResults</servlet-name>
+	<url-pattern>/browsegenreresults</url-pattern>
+	<url-pattern>/browsetitleresults</url-pattern>
+
+</servlet-mapping>
   
 </web-app>
