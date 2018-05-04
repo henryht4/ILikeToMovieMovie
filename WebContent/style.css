@@ -1,5 +1,5 @@
 body {
-    background-color: #e6cedb;
+    background-color: #000000;
     background-image: url('https://images7.alphacoders.com/566/566562.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -11,17 +11,11 @@ body {
     margin:0px;
 }
 
-logoimg {
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    z-index: -1;
-}
 
 h1 {
 	padding-top: 100px;
 	padding-bottom: 100px;
-	margin-top: 30px;
+	margin: 30px;
     color: #FFFFFF;
     text-transform: capitalize;
     letter-spacing: 3px;
@@ -29,8 +23,32 @@ h1 {
     font-weight: bold;
    
     }
-p {
-    color: #CC6666;
+    
+h-login {
+	padding-top: 50px;
+	padding-bottom: 50px;
+	margin: 30px;
+    color: #FFFFFF;
+    text-transform: capitalize;
+    letter-spacing: 3px;
+    font-size: 50px;
+    font-weight: bold;
+   
+    }
+
+
+.signin{
+  	width: 400px;
+ 	border: 1px solid #000000;
+  	padding: 8px 12px;
+  	background-color: #FFFFFF;
+  	opacity: 0.9;
+	font-size: 12px;	
+	}
+
+.p {
+    color: #000000;
+    text-transform: capitalize;
 }
 
 div {
@@ -42,6 +60,10 @@ div {
     
 }
 
+.div1{
+	background-color: #FFFFFF;
+    opacity: 0.9;
+}
 table, th {
     border: 0px;
     border-style:solid;
@@ -50,7 +72,19 @@ table, th {
     background-color: #FFFFFF;
     opacity: 0.9;
 	font-size: 12px;
+	padding: 30px;
 	
 }
 
+.navbar-brand {
+	height: 40px;
+    padding-top:0;
+	
+}
 
+.navbar-header,
+.navbar-nav li a {
+    line-height: 40px;
+    height: 40px;
+    padding-top: 0;
+}

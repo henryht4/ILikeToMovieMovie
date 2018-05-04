@@ -92,9 +92,10 @@ public class SearchResults extends HttpServlet {
 
             // Retrieve parameter "name" from the http request, which refers to the value of <input name="name"> in index.html
             String title = request.getParameter("title");
-
+            String limit = request.getParameter("limit");
+            
             // Generate a SQL query
-            String query = String.format("SELECT * FROM movies WHERE title like '%s'", title);
+            String query = String.format("SELECT * FROM movies WHERE title like '%s' LIMIT %s", title, limit);
            
             // Perform the query
             ResultSet rs = statement.executeQuery(query);
@@ -192,13 +193,14 @@ public class SearchResults extends HttpServlet {
 
             // Retrieve parameter "name" from the http request, which refers to the value of <input name="name"> in index.html
             String year = request.getParameter("year");
+            String limit = request.getParameter("limit");
             
 
             // Building page body
             out.println(String.format("<body><h1>Movies made in the Year %s</h1>", year));
             
             // Generate a SQL query
-            String query = String.format("SELECT * FROM movies WHERE year = '%s'", year);
+            String query = String.format("SELECT * FROM movies WHERE year = '%s' LIMIT %s", year, limit);
            
             // Perform the query
             ResultSet rs = statement.executeQuery(query);
@@ -290,9 +292,10 @@ public class SearchResults extends HttpServlet {
 
             // Retrieve parameter "name" from the http request, which refers to the value of <input name="name"> in index.html
             String director = request.getParameter("director");
+            String limit = request.getParameter("limit");
            
             // Generate a SQL query
-            String query = String.format("SELECT * FROM movies WHERE director like '%s'", director);
+            String query = String.format("SELECT * FROM movies WHERE director like '%s' LIMIT %s", director, limit);
            
             // Perform the query
             ResultSet rs = statement.executeQuery(query);
@@ -389,11 +392,12 @@ public class SearchResults extends HttpServlet {
 
             // Retrieve parameter "name" from the http request, which refers to the value of <input name="name"> in index.html
             String star = request.getParameter("star");
+            String limit = request.getParameter("limit");
            
             // Generate a SQL query
             String query = String.format(" SELECT s.name, m.id, m.title, m.year,m.director "
             		+ "FROM movies m, stars s, stars_in_movies sl "
-            		+ "WHERE m.id = sl.movieId and sl.starId = s.id and s.name like '%s'", star);
+            		+ "WHERE m.id = sl.movieId and sl.starId = s.id and s.name like '%s' LIMIT %s", star, limit);
            
             // Perform the query
             ResultSet rs = statement.executeQuery(query);

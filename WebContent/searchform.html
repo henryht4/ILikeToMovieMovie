@@ -6,32 +6,54 @@
   </head>
   
   <body>
+  
+
   	<h1 ALIGN = "left">Search by Movie Title</h1>
   	
   	<form ACTION = "titleresult" METHOD ="GET">
-  		<H3>Enter Title: </H3><br>
+  		Enter Title: 
   		<input TYPE="TEXT" name="title" value = "Jurassic%"> (Use % to replace any strings. e.g. Jurassic%)<br>
-  		<input TYPE="SUBMIT" Value="Search Title">
+  		 Select # of Movies to Display Per Page
+ 		 <input type = "radio" name = "limit" value = "5"/ checked>5
+ 		 <input type = "radio" name = "limit" value = "10"/>10
+ 		 <input type = "radio" name = "limit" value = "15"/>15
+ 		 <br>
+  		<br><input TYPE="SUBMIT" Value="Search Title">
   	</form>
   	
   	<h1 ALIGN = "left">Search by Movie Year</h1>
   	<form ACTION = "yearresult" METHOD ="GET">	
-  		<H3>Enter Year: </H3><br>  	
-  		<input TYPE="TEXT" name="year" value = 2017><br>  	
-  		<input TYPE="SUBMIT" Value="Search By Year">
+  		Enter Year: 	
+  		<input TYPE="TEXT" name="year" value = 2017><br>
+  		 Select # of Movies to Display Per Page
+ 		 <input type = "radio" name = "limit" value = "5"/ checked>5
+ 		 <input type = "radio" name = "limit" value = "10"/>10
+ 		 <input type = "radio" name = "limit" value = "15"/>15
+ 		 <br><br>
+ 		 <input TYPE="SUBMIT" Value="Search By Year">
   	</form>
   	
   	<h1 ALIGN = "left">Search by Movie Director</h1>
   	<form ACTION = "directorresult" METHOD ="GET">	
-  		<H3>Enter Director Name: </H3><br>  	
-  		<input TYPE="TEXT" name="director" value = Neil%><br>  	
+  		Enter Director Name:	
+  		<input TYPE="TEXT" name="director" value = Neil%><br>  
+  		 Select # of Movies to Display Per Page
+ 		 <input type = "radio" name = "limit" value = "5"/ checked>5
+ 		 <input type = "radio" name = "limit" value = "10"/>10
+ 		 <input type = "radio" name = "limit" value = "15"/>15
+ 		 <br><br>	
   		<input TYPE="SUBMIT" Value="Search By Director">
   	</form>
   	
   	<h1 ALIGN = "left">Search by Movie Star</h1>
   	<form ACTION = "moviebystarresult" METHOD ="GET">	
-  		<H3>Enter Star's Name: </H3><br>  	
-  		<input TYPE="TEXT" name="star" value = Jackie%><br>  	
+  		Enter Star's Name: <br>  	
+  		<input TYPE="TEXT" name="star" value = Jackie%><br>
+  		 Select # of Movies to Display Per Page
+ 		 <input type = "radio" name = "limit" value = "5"/ checked>5
+ 		 <input type = "radio" name = "limit" value = "10"/>10
+ 		 <input type = "radio" name = "limit" value = "15"/>15
+ 		 <br><br>  	
   		<input TYPE="SUBMIT" Value="Search By Star">
   	</form>
   	
