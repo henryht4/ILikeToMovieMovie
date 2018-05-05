@@ -16,12 +16,11 @@ h1 {
 	padding-top: 100px;
 	padding-bottom: 100px;
 	margin: 30px;
-    color: #FFFFFF;
-    text-transform: capitalize;
-    letter-spacing: 3px;
-    font-size: 70px;
+    color: #000000;
+    letter-spacing: 2px;
+    font-size: 50px;
     font-weight: bold;
-   
+   	text-align:center;
     }
     
 h-login {
@@ -38,15 +37,17 @@ h-login {
 
 
 .signin{
-  	width: 400px;
+  	width: 300px;
+  	height: 250px;
  	border: 1px solid #000000;
-  	padding: 8px 12px;
+  	padding-top:50px;
+  	padding-bottom:50px;
   	background-color: #FFFFFF;
   	opacity: 0.9;
 	font-size: 12px;	
 	}
 
-.p {
+p {
     color: #000000;
     text-transform: capitalize;
 }
@@ -57,12 +58,30 @@ div {
     padding-bottom: 20px;
     padding-left: 70px;
     font-size: 14px;
-    
+
 }
+
+.container {
+    width: 800px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: white;
+    opacity: 0.9;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    text-color: #000000;
+}
+
 
 .div1{
 	background-color: #FFFFFF;
     opacity: 0.9;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    
+    
 }
 table, th {
     border: 0px;
