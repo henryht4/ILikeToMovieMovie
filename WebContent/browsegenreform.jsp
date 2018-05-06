@@ -21,7 +21,7 @@
   
   <body>
   	<div class="div1" >
-  	<h1 ALIGN = "CENTER">Search by Movie Genre</h1>
+  	<h1 ALIGN = "CENTER">Browse by Movie Genre</h1>
   	<center>
   	<form ACTION = "browsegenreresults" METHOD = "POST">
   		<h5> Select A Genre:</h5>
@@ -53,7 +53,6 @@
  		 <br>
  		 
  		 <h5> Select # of Movies to Display Per Page</h5>
- 		 <br>
  		 <input type = "radio" name = "limit" value = "5"/ checked>5
  		 <input type = "radio" name = "limit" value = "10"/>10
  		 <input type = "radio" name = "limit" value = "15"/>15

@@ -21,43 +21,56 @@
   <body>
 
 	<div class="div1" >
-    <h1 ALIGN = "CENTER">Search by Movie Title Letter</h1>
+    <h1 ALIGN = "CENTER">Browse by Letter</h1>
   	<center>
   	<form ACTION = "browsetitleresults" METHOD = "POST">
   		<h5> Select A Letter:</h5>
-  		<select name = "letter">
-  		 <option value="A%"> A</option>
-  		 <option value="B%"> B</option>
- 		 <option value="C%"> C</option>
- 		 <option value="D%"> D</option>
- 		 <option value="E%"> E</option>
- 		 <option value="F%"> F</option>
- 		 <option value="G%"> G</option>
- 		 <option value="H%"> H</option>
- 		 <option value="I%"> I</option>
- 		 <option value="J%"> J</option>
- 		 <option value="K%"> K</option>
- 		 <option value="L%"> L</option>
- 		 <option value="M%"> M</option>
- 		 <option value="N%"> N</option>
- 		 <option value="O%"> O </option>
- 		 <option value="P%"> P</option>
- 		 <option value="Q%"> Q</option>
- 		 <option value="R%"> R</option>
- 		 <option value="S%"> S</option>
- 		 <option value="T%"> Y</option>
- 		 <option value="U%"> U</option>
- 		 <option value="V%"> V</option>
- 		 <option value="W%"> W</option>
- 		 <option value="X%"> X</option>
- 		 <option value="Y%"> Y</option>
- 		 <option value="Z%"> Z</option>
- 		 </select>
+  		
+  		
+  		<select name="letter">
+  			<option value="A%">A</option>
+ 			<option value="B%">B</option>
+ 			<option value="C%">C</option>
+ 			<option value="D%">D</option>
+ 			<option value="E%">E</option>
+ 			<option value="F%">F</option>
+ 			<option value="G%">G</option>
+ 			<option value="H%">H</option>
+ 			<option value="I%">I</option>
+ 			<option value="J%">J</option>
+ 			<option value="K%">K</option>
+ 			<option value="L%">L</option>
+ 			<option value="M%">M</option>
+ 			<option value="N%">N</option>
+ 			<option value="O%">O</option>
+ 			<option value="P%">P</option>
+ 			<option value="Q%">Q</option>
+ 			<option value="R%">R</option>
+ 			<option value="S%">S</option>
+ 			<option value="T%">T</option>
+ 			<option value="U%">U</option>
+ 			<option value="V%">V</option>
+ 			<option value="W%">W</option>
+ 			<option value="X%">X</option>
+ 			<option value="Y%">Y</option>
+ 			<option value="Z%">Z</option>
+ 			
+ 		
+ 		</select>
+  		
+  		
  		 <br>
  		 Select # of Movies to Display Per Page
- 		 <input type = "radio" name = "limit" value = "5" checked>5
- 		 <input type = "radio" name = "limit" value = "10"/>10
- 		 <input type = "radio" name = "limit" value = "15"/>15
+ 		 <input type = "radio" name = "limit" value = "5" checked> 5
+ 		 <input type = "radio" name = "limit" value = "10"/> 10
+ 		 <input type = "radio" name = "limit" value = "15"/> 15
+ 		 <input type = "radio" name = "limit" value = "20"/> 20
+ 		 <input type = "radio" name = "limit" value = "25"/> 25
+ 		 <br>
+ 		 
+ 		 Sort Rating in ASC/DESC order
+ 		 <input type = "radio" name = "order" value = "ASC" checked> ASC
+ 		 <input type = "radio" name = "order" value = "DESC"/> DESC
  		 <br><br>
  		 <input type="SUBMIT" value = "Search">
  		 

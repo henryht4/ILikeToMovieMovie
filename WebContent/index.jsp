@@ -23,7 +23,7 @@
     
     <h2>Buttons to all webpages for QUICK ACCESS TESTING</h2>
     
-    <button onclick="window.location.href='browse.html'">Browse Movies</button>
+    <button onclick="window.location.href='browse.jsp'">Browse Movies</button>
     
     <button onclick="window.location.href='searchform.html'">Search For Movies</button>
 	

@@ -85,8 +85,8 @@ public class BrowseResults extends HttpServlet {
 
             // Generate a SQL query
             String query = String.format("SELECT * "
-            		+ "FROM movies m, genres_in_movies gl, genres g "
-            		+ "WHERE m.id = gl.movieId and gl.genreId = g.id and g.name = '%s' LIMIT %s OFFSET 0", genre, limit );
+            		+ "FROM movies m, genres_in_movies gl, genres g, ratings r "
+            		+ "WHERE r.movieId = m.id and m.id = gl.movieId and gl.genreId = g.id and g.name = '%s' LIMIT %s OFFSET 0", genre, limit );
             
          
 
@@ -98,13 +98,14 @@ public class BrowseResults extends HttpServlet {
             out.println("<table border>");
             	
             // Iterate through each row of rs and create a table row <tr>
-            out.println("<tr><td>ID</td><td>Title</td><td>Year</td><td>Director</td><td>Genres</td><td>Stars</td></tr>");
+            out.println("<tr><td>ID</td><td>Title</td><td>Year</td><td>Director</td><td>Genres</td><td>Stars</td><td>Rating</td></tr>");
             while (rs.next()) {
                 String movieID = rs.getString("id");
                 String movieTitle = rs.getString("title");
                 String movieYear = rs.getString("year");
                 String movieDirector = rs.getString("director");
                 String movieGenre = rs.getString("name");
+                String movieRating = rs.getString("rating");
                 
               //create genre statement
                 String ListOfGenres = "";
@@ -128,11 +129,7 @@ public class BrowseResults extends HttpServlet {
         		
         		//Create Star Query
         		String StarQuery = String.format("select s.name from movies m, stars_in_movies sl, stars s where sl.starId = s.id and sl.movieId = '%s' and m.id = '%s'",movieID,movieID);
-			
-        				//String.format("SELECT s.name"
-        				//+ "FROM movies m, stars_in_movies sl, stars s"
-        				//+ "WHERE sl.starId = s.id and sl.movieId = '%s' and m.id = '%s'", movieID, movieID);
-        				
+	
         		//execute StarQuery to make set
         		ResultSet StarSet = StarsStatement.executeQuery(StarQuery);
         		
@@ -141,7 +138,7 @@ public class BrowseResults extends HttpServlet {
         		}
         		
         		
-                out.println(String.format("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", movieID, movieTitle,movieYear,movieDirector, ListOfGenres,ListOfStars));
+                out.println(String.format("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", movieID, movieTitle,movieYear,movieDirector, ListOfGenres,ListOfStars, movieRating));
                 
                 StarSet.close();
                 StarsStatement.close();
@@ -156,8 +153,6 @@ public class BrowseResults extends HttpServlet {
             statement.close();
             dbCon.close();
             
-            out.println("<form action = > /form>")	;
-
 
         } catch (Exception ex) {
 
@@ -167,6 +162,9 @@ public class BrowseResults extends HttpServlet {
         }
         out.close();
     }
+
+
+
 	 void browsetitlefunction(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
 			response.setContentType("text/html");    // Response mime type
 
@@ -174,11 +172,12 @@ public class BrowseResults extends HttpServlet {
 	        PrintWriter out = response.getWriter();
 
 	        // Building page head with title
-	        out.println("<html><head><title>Movies By Letter Found:</title></head>");
+	        out.println("<html><head><title>Movies By Letter:</title></head>");
 
 	        // Building page body
 	        out.println("<body><h1>Movies By Letter</h1>");
-
+	        
+	    
 
 	        try {
 
@@ -191,27 +190,30 @@ public class BrowseResults extends HttpServlet {
 	            // Retrieve parameter "name" from the http request, which refers to the value of <input name="name"> in index.html
 	            String letter = request.getParameter("letter");
 	            String limit = request.getParameter("limit");
+	            String order = request.getParameter("order");
 
 	            // Generate a SQL query
-	            String query = String.format("Select * from movies where title like The% LIMIT %s", limit);
+	            String query = String.format("SELECT * "
+	            		+ "FROM movies m, ratings r "
+	            		+ "WHERE r.movieId = m.id and m.title like '%s' ORDER BY r.rating %s LIMIT %s OFFSET 0", letter, order, limit );
 	            
 	         
 
 	            // Perform the query
 	            ResultSet rs = statement.executeQuery(query);
 
-	            out.println(String.format("<h3>'%s' Movies Found:</h3>"));
+	            out.println(String.format("<h3> Movies Starting with %s :</h3>", letter));
 	            // Create a html <table>
 	            out.println("<table border>");
 	            	
 	            // Iterate through each row of rs and create a table row <tr>
-	            out.println("<tr><td>ID</td><td>Title</td><td>Year</td><td>Director</td><td>Genres</td><td>Stars</td></tr>");
+	            out.println("<tr><td>ID</td><td>Title</td><td>Year</td><td>Director</td><td>Genres</td><td>Stars</td><td>Rating</td></tr>");
 	            while (rs.next()) {
 	                String movieID = rs.getString("id");
 	                String movieTitle = rs.getString("title");
 	                String movieYear = rs.getString("year");
 	                String movieDirector = rs.getString("director");
-	                String movieGenre = rs.getString("name");
+	                String movieRating = rs.getString("rating");
 	                
 	              //create genre statement
 	                String ListOfGenres = "";
@@ -235,11 +237,7 @@ public class BrowseResults extends HttpServlet {
 	        		
 	        		//Create Star Query
 	        		String StarQuery = String.format("select s.name from movies m, stars_in_movies sl, stars s where sl.starId = s.id and sl.movieId = '%s' and m.id = '%s'",movieID,movieID);
-				
-	        				//String.format("SELECT s.name"
-	        				//+ "FROM movies m, stars_in_movies sl, stars s"
-	        				//+ "WHERE sl.starId = s.id and sl.movieId = '%s' and m.id = '%s'", movieID, movieID);
-	        				
+		
 	        		//execute StarQuery to make set
 	        		ResultSet StarSet = StarsStatement.executeQuery(StarQuery);
 	        		
@@ -248,7 +246,7 @@ public class BrowseResults extends HttpServlet {
 	        		}
 	        		
 	        		
-	                out.println(String.format("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", movieID, movieTitle,movieYear,movieDirector, ListOfGenres,ListOfStars));
+	                out.println(String.format("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", movieID, movieTitle,movieYear,movieDirector, ListOfGenres,ListOfStars, movieRating));
 	                
 	                StarSet.close();
 	                StarsStatement.close();
@@ -263,8 +261,6 @@ public class BrowseResults extends HttpServlet {
 	            statement.close();
 	            dbCon.close();
 	            
-	            out.println("<form action = > /form>")	;
-
 
 	        } catch (Exception ex) {
 
@@ -274,5 +270,6 @@ public class BrowseResults extends HttpServlet {
 	        }
 	        out.close();
 	    }
+
 
 }
