@@ -80,7 +80,7 @@ public class Cart extends HttpServlet {
 				
 				//if the arraylist is not empty
 				if(!items.isEmpty()) {
-					int index;
+					int index = -1; //initialize index as -1
 					
 					for (int i = 0; i < items.size(); i++) {
 						if (items.get(i).getMovie().getId() == id)
@@ -111,14 +111,17 @@ public class Cart extends HttpServlet {
 			//if delete gets called
 			if (delete != null) {
 				int deleteId = Integer.parseInt(delete);
-				int index;
+				int index = -1;
 				
 				for (int i = 0; i < items.size(); i++) {
 					if (items.get(i).getMovie().getId() == deleteId)
 							index = deleteId;
 					}
+				
 				//remove the item from the arraylist
+				if (index != -1) {
 				items.remove(index);
+				}
 			}
 			
 			//delete all items in the arraylist
@@ -134,8 +137,26 @@ public class Cart extends HttpServlet {
 			for(MovieQuantity i : items){
 				total += i.getQuantity()*5;
 			}
+			
+			
+			//gets an arraylist of genres
 			try {
-				genres = query.getGenres();	
+				
+				ArrayList<String> genresArr = new ArrayList<String>();
+
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection connection = DriverManager.getConnection("jdbc:mysql:///moviedb?useSSL=false", "mytestuser",
+						"mypassword");
+
+				Statement select = connection.createStatement();
+				ResultSet result = select.executeQuery("Select name from genres order by name ASC");
+				while (result.next()) {
+					genresArr.add(result.getString(1));
+				}
+				connection.close();
+				
+				
+				genres = genresArr;	
 			}  catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
