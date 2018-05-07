@@ -23,6 +23,13 @@ h1 {
    	text-align:center;
     }
     
+h2 {
+    color: #f17676;
+    letter-spacing: 2px;
+    font-size: 30px;
+    font-weight: bold;
+   	text-align:center;
+    }
 h-login {
 	padding-top: 50px;
 	padding-bottom: 50px;

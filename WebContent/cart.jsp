@@ -18,33 +18,59 @@
 <body>
 	
 	<div class="container">
+			<h1>Shopping Cart</h1>
+			<h2>${emptyCart}</h2>
+			
+			<form action="cart?update="true" method="post">
+				<table>
 
-	<h1>Shopping Cart</h1>
-
-		<form type=POST action=carts.jsp>
-		<BR>
-		Please enter item to add or remove:
-		<br>
-		Add Item:
-		
-		<SELECT NAME="item">
-		<OPTION>Beavis & Butt-head Video collection
-		<OPTION>X-files movie
-		<OPTION>Twin peaks tapes
-		<OPTION>NIN CD
-		<OPTION>JSP Book
-		<OPTION>Concert tickets
-		<OPTION>Love life
-		<OPTION>Switch blade
-		<OPTION>Rex, Rugs & Rock n' Roll
-		</SELECT>
-		
-		
-		<br> <br>
-		<INPUT TYPE=submit name="submit" value="add">
-		<INPUT TYPE=submit name="submit" value="remove">
-		
-		</form>
+					<tbody>	
+						<%--iterate through each "item" in the arraylist of movies in cart and display those movies --%>
+						<c:forEach var="item" items="${items}">
+							<tr>
+								<td>
+								<div>
+									<a href="singlemovie?id=${item.getMovie().getId()}">${item.getMovie().getTitle()}</a>
+								</div>
+								</td>
+								
+								<td>Product: </td>
+								<td>Quantity: </td>
+								<td><input name="${item.getMovie().getId()}" class="form-control" value="${item.getQuantity()}">
+								</td>
+								<td>Price: $10</td>
+								<td><a class="btn btn-default" href="cart?remove=${item.getMovie().getId()}">Remove</a>
+							</tr>
+						</c:forEach>
+						<tr>
+							<td> </td>
+							<td> </td>
+							<td> </td>
+							<td><h3>Total</h3></td>
+							<td class="text-right"><h3>
+									<strong>$${total}</strong>
+								</h3></td>
+						</tr>
+						<tr>
+							<td><a class="btn btn-default" href="index.jsp">
+								 	Continue Shopping
+							</a></td>
+							<td>
+								<button type="submit" class="btn btn-default">
+									Update Cart
+								</button>
+							</td>
+							<td><a class="btn btn-default" style="background-color:red; color: #ffffff" href="cart?removeAll=true">
+									Remove All
+							</a></td>
+							<td><a class="btn btn-default" style="background-color:#1eff9f" href="checkout.jsp">
+									Proceed to Checkout
+							</a></td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</form>
 	</div>
 </body>
 </html>

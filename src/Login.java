@@ -57,7 +57,7 @@ public class Login extends HttpServlet {
 			ResultSet result = statement.executeQuery(query);
 
 			if(result.next()) {
-		        HttpSession session = request.getSession();//save user data in session scope
+		        HttpSession session = request.getSession();//save user email in session scope
 		        session.setAttribute("email", email);
 				response.sendRedirect("index.jsp");
 			}

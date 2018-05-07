@@ -139,28 +139,6 @@ public class Cart extends HttpServlet {
 			}
 			
 			
-			//gets an arraylist of genres
-			try {
-				
-				ArrayList<String> genresArr = new ArrayList<String>();
-
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection connection = DriverManager.getConnection("jdbc:mysql:///moviedb?useSSL=false", "mytestuser",
-						"mypassword");
-
-				Statement select = connection.createStatement();
-				ResultSet result = select.executeQuery("Select name from genres order by name ASC");
-				while (result.next()) {
-					genresArr.add(result.getString(1));
-				}
-				connection.close();
-				
-				
-				genres = genresArr;	
-			}  catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
-			
 			session.setAttribute("emptyCart", empty);
 			session.setAttribute("items", items);
 			session.setAttribute("genres", genres);

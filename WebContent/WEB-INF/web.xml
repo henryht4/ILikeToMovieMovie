@@ -38,4 +38,12 @@
     <url-pattern>/browsegenreresults</url-pattern>
     <url-pattern>/browsetitleresults</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>Cart</servlet-name>
+    <servlet-class>Cart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Cart</servlet-name>
+    <url-pattern>/cart</url-pattern>
+    </servlet-mapping>
 </web-app>
