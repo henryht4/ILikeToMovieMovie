@@ -4,14 +4,21 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.annotation.Resource;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+
+import helper.Movie;
+import helper.StarListing;
+import helper.Query;
 
 
 
@@ -21,9 +28,10 @@ import javax.sql.DataSource;
 @WebServlet(name = "/BrowseResults")
 public class BrowseResults extends HttpServlet {
 	
-	
-	
-	private static final String BROWSETITLE = "/browsetitleresults";
+
+	private static final long serialVersionUID = 1L;
+
+	//private static final String BROWSETITLE = "/browsetitleresults";
 	private static final String BROWSEGENRE = "/browsegenreresults";
 
 	@Resource(name = "jdbc/moviedb")
@@ -48,12 +56,13 @@ public class BrowseResults extends HttpServlet {
 		processRequest(request, response);
 
 	}
-	 private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	
+	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 	    	String path = request.getServletPath();
 	    	switch(path) {
-	    	case BROWSETITLE:
-	    		browsetitlefunction(request,response);
-	    		break;
+	    	//case BROWSETITLE:
+	    	//	browsetitlefunction(request,response);
+	    	//	break;
 	    	case BROWSEGENRE:
 	    		browsegenrefunction(request, response);
 	    		break;
@@ -63,7 +72,9 @@ public class BrowseResults extends HttpServlet {
 	    }
 	    
 	 void browsegenrefunction(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
-		response.setContentType("text/html");    // Response mime type
+		 RequestDispatcher dispatch = request.getRequestDispatcher("browseGenreDisplay.jsp");
+		 dispatch.forward(request,response);
+		 response.setContentType("text/html");    // Response mime type
 
         // Output stream to STDOUT
         PrintWriter out = response.getWriter();
@@ -90,15 +101,15 @@ public class BrowseResults extends HttpServlet {
 
             // Retrieve parameter "name" from the http request, which refers to the value of <input name="name"> in index.html
             String genre = request.getParameter("genre");
-            String limit = request.getParameter("limit");
+            
 
             // Generate a SQL query
             String query = String.format("SELECT * "
             		+ "FROM movies m, genres_in_movies gl, genres g, ratings r "
-            		+ "WHERE r.movieId = m.id and m.id = gl.movieId and gl.genreId = g.id and g.name = '%s' LIMIT %s OFFSET 0", genre, limit );
+            		+ "WHERE r.movieId = m.id and m.id = gl.movieId and gl.genreId = g.id and g.name = '%s' LIMIT 10 OFFSET 0", genre);
             
          
-
+            
             // Perform the query
             ResultSet rs = statement.executeQuery(query);
             
@@ -185,7 +196,7 @@ public class BrowseResults extends HttpServlet {
     }
 
 
-
+/*
 	 void browsetitlefunction(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
 			response.setContentType("text/html");    // Response mime type
 
@@ -318,5 +329,5 @@ public class BrowseResults extends HttpServlet {
 	        out.close();
 	    }
 
-
+*/
 }

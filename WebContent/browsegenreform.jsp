@@ -51,12 +51,7 @@
  		 <option value="Western"> Western<br></option>
  		 </select>
  		 <br>
- 		 
- 		 <h5> Select # of Movies to Display Per Page</h5>
- 		 <input type = "radio" name = "limit" value = "5"/ checked>5
- 		 <input type = "radio" name = "limit" value = "10"/>10
- 		 <input type = "radio" name = "limit" value = "15"/>15
- 		 <br>
+
  		 <input type="SUBMIT" value = "Search">
  		 
  		 

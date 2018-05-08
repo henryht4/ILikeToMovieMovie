@@ -18,16 +18,16 @@
 <body>
 	<div class="div1"><center><a href="./login.jsp"><img src ="http://i68.tinypic.com/33ju1p4.png"></a></center>
 	
-	    <p>Welcome to our movie database! This is the main page</p><br>
+	    <p>Welcome to our movie database!</p><br>
     
     
-    <h2>Buttons to all webpages for QUICK ACCESS TESTING</h2>
+    <h2>Please Select an Option To Begin</h2>
     
     <button onclick="window.location.href='browse.jsp'">Browse Movies</button>
     
     <button onclick="window.location.href='searchform.html'">Search For Movies</button>
 	
-    
+    <!-- 
     <p><a href = "http://localhost:8080/ILikeToMovieMovie/ratings">Link to Ratings</a></p>
     <p><a href = "http://localhost:8080/ILikeToMovieMovie/searchform.html">Link to Search Form</a></p>
     <p><a href = "http://localhost:8080/ILikeToMovieMovie/titleresult?title=">Link to Empty Title Result</a></p>
@@ -37,7 +37,7 @@
     <p><a href = "http://localhost:8080/ILikeToMovieMovie/genreform.html">Link to Genre Search Form</a></p>
     <p><a href = "http://localhost:8080/ILikeToMovieMovie/genreresults?genre=">Link to Empty Genre Search Results</a></p>
 
-   
+   -->
 	</div>
     
 

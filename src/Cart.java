@@ -24,7 +24,8 @@ import java.util.Map;
 import java.io.*;
 
 //import helper classes to use helper functions 
-import helper.SingleMovie;
+import helper.MoveListing;
+import helper.MovieListing;
 import helper.MovieQuantity;
 
 
@@ -49,7 +50,7 @@ public class Cart extends HttpServlet {
 			ArrayList<MovieQuantity> items = (ArrayList<MovieQuantity>) session.getAttribute("items");
 
 			//if movieId does exist, then we parse the string
-			int id = 0;
+			String id = 0;
 			if(movieId != null)
 				id = Integer.parseInt(movieId);
 			//initialize the arraylist
@@ -69,7 +70,7 @@ public class Cart extends HttpServlet {
 			}
 			
 			if(title != null & id != 0) {
-				SingleMovie movie = new SingleMovie(id, title);
+				MovieListing movie = new MovieListing(id, title);
 				
 				//if the arraylist is not empty
 				if(!items.isEmpty()) {
