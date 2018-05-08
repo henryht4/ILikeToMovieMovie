@@ -48,12 +48,9 @@ public class Cart extends HttpServlet {
 			String deleteAll = request.getParameter("deleteAll");
 			String update = request.getParameter("update");
 		
-
-//			Query query = new Query();	
 			
 			//arraylist of movies from MovieQuantity
 			ArrayList<MovieQuantity> items = (ArrayList<MovieQuantity>) session.getAttribute("items");
-			ArrayList<String> genres = new ArrayList<String>();
 
 			//if movieId does exist, then we parse the string
 			int id = 0;
@@ -141,7 +138,6 @@ public class Cart extends HttpServlet {
 			
 			session.setAttribute("emptyCart", empty);
 			session.setAttribute("items", items);
-			session.setAttribute("genres", genres);
 			session.setAttribute("total", total);
 			request.getRequestDispatcher("cart.jsp").forward(request, response);
 		}

@@ -13,11 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+
+
 /**
  * Servlet implementation class GenreSearchResults
  */
 @WebServlet(name = "/BrowseResults")
 public class BrowseResults extends HttpServlet {
+	
+	
 	
 	private static final String BROWSETITLE = "/browsetitleresults";
 	private static final String BROWSEGENRE = "/browsegenreresults";
@@ -42,6 +46,7 @@ public class BrowseResults extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request, response);
+
 	}
 	 private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 	    	String path = request.getServletPath();
@@ -63,14 +68,18 @@ public class BrowseResults extends HttpServlet {
         // Output stream to STDOUT
         PrintWriter out = response.getWriter();
 
-        // Building page head with title
-        out.println("<html><head><title>Movies By Genre Found:</title></head>");
-
-        // Building page body
-        out.println("<body><h1>Movies By Genre</h1>");
+        //css
+        out.println("<HTML><head>"+
+        		"<link rel=\"stylesheet\" href=\"style.css\">" + 
+        		"</head>"
+        		);
         
-    
+        
+        // Building page head with title
+        out.println("<title>Movies By Genre Found:</title>");
 
+
+       
         try {
 
             // Create a new connection to database
@@ -92,11 +101,19 @@ public class BrowseResults extends HttpServlet {
 
             // Perform the query
             ResultSet rs = statement.executeQuery(query);
+            
+            out.println(String.format("<center><div>"));
 
-            out.println(String.format("<h3>'%s' Movies Found:</h3>", genre));
             // Create a html <table>
-            out.println("<table border>");
-            	
+            out.println("<table>");
+
+            // Building page body
+            out.println("<body><h>Movies By Genre</h>");
+            
+            out.println("<div class=\"div1\">");
+
+            out.println(String.format("<h2>'%s' Movies Found:</h2>", genre));
+            
             // Iterate through each row of rs and create a table row <tr>
             out.println("<tr><td>ID</td><td>Title</td><td>Year</td><td>Director</td><td>Genres</td><td>Stars</td><td>Rating</td></tr>");
             while (rs.next()) {
@@ -139,15 +156,19 @@ public class BrowseResults extends HttpServlet {
         		
         		
                 out.println(String.format("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>", movieID, movieTitle,movieYear,movieDirector, ListOfGenres,ListOfStars, movieRating));
-                
+                out.println(String.format("</div></center>"));
                 StarSet.close();
                 StarsStatement.close();
                 GenreSet.close();
                 GenreStatement.close();
             }
+
             out.println("</table>");
 
+            out.println("</div>");
 
+            out.println("</HTML>");
+            
             // Close all structures
             rs.close();
             statement.close();
@@ -168,15 +189,21 @@ public class BrowseResults extends HttpServlet {
 	 void browsetitlefunction(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
 			response.setContentType("text/html");    // Response mime type
 
+			
+			
 	        // Output stream to STDOUT
 	        PrintWriter out = response.getWriter();
 
-	        // Building page head with title
-	        out.println("<html><head><title>Movies By Letter:</title></head>");
-
-	        // Building page body
-	        out.println("<body><h1>Movies By Letter</h1>");
+	        //css
+	        out.println("<HTML><head>"+
+	        		"<link rel=\"stylesheet\" href=\"style.css\">" + 
+	        		"</head>"
+	        		);
 	        
+	        
+	        // Building page head with title
+	        out.println("<title>Movies By Letter:</title>");
+
 	    
 
 	        try {
@@ -197,14 +224,27 @@ public class BrowseResults extends HttpServlet {
 	            		+ "FROM movies m, ratings r "
 	            		+ "WHERE r.movieId = m.id and m.title like '%s' ORDER BY r.rating %s LIMIT %s OFFSET 0", letter, order, limit );
 	            
-	         
+
+
+
 
 	            // Perform the query
 	            ResultSet rs = statement.executeQuery(query);
 
-	            out.println(String.format("<h3> Movies Starting with %s :</h3>", letter));
+	            out.println(String.format("<center><div>"));
+
+		        // Building page body
+		        out.println("<body><h>Movies By Letter</h>");
+		        
+
+	            out.println("<div class=\"div1\">");
+
+	            out.println(String.format("<h2> Movies Starting with %s :</h2>", letter));
+	            
+
 	            // Create a html <table>
-	            out.println("<table border>");
+	            
+	            out.println("<table>");
 	            	
 	            // Iterate through each row of rs and create a table row <tr>
 	            out.println("<tr><td>ID</td><td>Title</td><td>Year</td><td>Director</td><td>Genres</td><td>Stars</td><td>Rating</td></tr>");
@@ -253,8 +293,12 @@ public class BrowseResults extends HttpServlet {
 	                GenreSet.close();
 	                GenreStatement.close();
 	            }
+
 	            out.println("</table>");
 
+	            out.println("</div>");
+
+	            out.println("</HTML>");
 
 	            // Close all structures
 	            rs.close();
@@ -268,6 +312,9 @@ public class BrowseResults extends HttpServlet {
 	            out.println(String.format("<html><head><title>Error</title></head>\n<body><p>SQL error in doGet: %s</p></body></html>", ex.getMessage()));
 	            return;
 	        }
+	        
+	        
+	        
 	        out.close();
 	    }
 

@@ -14,20 +14,23 @@
 <body>	
 	<center><h-login>Login</h-login></center>
 	
-	<center><div class="signin">
+
+	<center><div class="container">
 	<form action= "login" method="post">
+		<center>
 		<table>
+			<p>Please sign in to access the site!</p>
 			<p></p>
-			<p></p>
-			<tr><td colspan ="3"><input type="email" name="email" placeholder="Email Address" required> </td></tr>
+			<tr><td><input type="email" name="email" placeholder="Email Address" required> </td></tr>
 			<tr><td><p></p></td></tr>
 			<tr><td> <input type="password" name= "password" placeholder ="Password" required></td></tr>
-			<tr><td colspan="3">
+			<tr><td>
 			<p></p>
             <button class="btn btn-lg btn-default btn-block login1" id="txtuser" type="submit"><span class="glyphicon glyphicon-log-in"></span> Login </button>   
 			
 		</table>
-		
+		</center>
+
 			<c:if test="${not empty errorMessage}">
 				<c:out value="${errorMessage}"/>
 			</c:if>

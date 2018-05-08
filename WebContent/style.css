@@ -11,6 +11,17 @@ body {
     margin:0px;
 }
 
+h {
+	padding-top: 100px;
+	padding-bottom: 100px;
+	margin: 30px;
+    color: #FFFFFF;
+    letter-spacing: 2px;
+    font-size: 50px;
+    font-weight: bold;
+   	text-align:center;
+    }
+    
 
 h1 {
 	padding-top: 100px;
@@ -113,4 +124,8 @@ table, th {
     line-height: 40px;
     height: 40px;
     padding-top: 0;
+}
+
+tr.spacing>td {
+  	padding: 3px;
 }

@@ -32,17 +32,19 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.getRequestDispatcher("login.jsp").forward(request, response);
+
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+	
+
 		String loginUser = "mytestuser";
         String loginPasswd = "mypassword";
         String loginUrl = "jdbc:mysql://localhost:3306/moviedb";
         
         try {
-        	        	
+
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			
 			Connection connection = DriverManager.getConnection(loginUrl,loginUser,loginPasswd);
@@ -62,7 +64,7 @@ public class Login extends HttpServlet {
 				response.sendRedirect("index.jsp");
 			}
 			else {
-
+				
 				request.setAttribute("errorMessage", "Invalid username or password! Please try again");
 				System.out.println("wrong pw");
 				RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
