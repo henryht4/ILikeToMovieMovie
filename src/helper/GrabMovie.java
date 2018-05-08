@@ -1,12 +1,12 @@
 package helper;
 //This class fetches the id and title of a given movie
-public class SingleMovie 
+public class GrabMovie 
 {
 	private int id;
 	private String title;
 
 	
-	public SingleMovie(int id, String title) {
+	public GrabMovie(int id, String title) {
 		super();
 		this.id = id;
 		this.title = title;

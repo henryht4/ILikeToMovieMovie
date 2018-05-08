@@ -20,8 +20,8 @@
 	<div class="container">
 			<h1>Shopping Cart</h1>
 			<h2>${emptyCart}</h2>
-			
-			<form action="cart?update="true" method="post">
+			<center>
+			<form action="cart?update="true" method="POST">
 				<table>
 					<%--iterate through each "item" in the arraylist of movies in cart and display those movies --%>
 					<c:forEach var="item" items="${items}">
@@ -38,18 +38,19 @@
 							<td><a class="btn btn-default" href="cart?remove=${item.getMovie().getId()}">Remove</a>
 						</tr>
 					</c:forEach>
+					
 					<tr>
 					<td> </td>
 					<td> </td>
 					<td> </td>
 					<td> </td>
-					<td><h3>Total: </h3></td>
-					<td class="text-right"><h3>
-					<strong>$${total}</strong>
-						</h3></td>
+					<td> </td>
+					<td><h2>Total: </h2></td>
+					<td class="text-right"><h2>$${total}</h2></td>
 					</tr>
 						
 					<%-- Buttons/Submissions --%>
+					
 					<tr class="spacing">
 						<td><button type="submit" class="btn btn-default"> Update Cart </button></td>
 						<td><a class="btn btn-default" style="background-color:red; color: #ffffff" href="cart?removeAll=true">
@@ -61,6 +62,7 @@
 					</tr>
 				</table>
 			</form>
+			</center>
 	</div>
 </body>
 </html>

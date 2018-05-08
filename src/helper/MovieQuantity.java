@@ -2,17 +2,17 @@ package helper;
 //this class will be used to add and subtract the quantity of a movie item
 public class MovieQuantity {
 
-	private SingleMovie movie;
+	private GrabMovie movie;
 	private int quantity;
 	
-	public MovieQuantity(SingleMovie movie, int quantity) 
+	public MovieQuantity(GrabMovie movie, int quantity) 
 	{	
 		this.movie = movie;
 		this.quantity = quantity;
 	}
 
 	//gets the current movie
-	public SingleMovie getMovie() 
+	public GrabMovie getMovie() 
 	{
 		return movie;
 	}
