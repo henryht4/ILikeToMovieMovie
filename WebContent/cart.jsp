@@ -33,8 +33,7 @@
 						</td>
 							<td>Product: </td>
 							<td>Quantity: </td>
-							<td><input name="${item.getMovie().getId()}" class="form-control" value="${item.getQuantity()}">
-							</td>
+							<td><input name="${item.getMovie().getId()}" value="${item.getQuantity()}" class="form-control" min="0"></td>
 							<td>Price: $10</td>
 							<td><a class="btn btn-default" href="cart?remove=${item.getMovie().getId()}">Remove</a>
 						</tr>

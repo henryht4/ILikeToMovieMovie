@@ -32,14 +32,10 @@ public class Cart extends HttpServlet {
 	
 	public Cart() {} //public constructor
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
-	
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//keeps everything in 1 session
-		HttpSession session = request.getSession(true);
+			//keeps everything in 1 session
+			HttpSession session = request.getSession(true);
 		
 	
 			String title = request.getParameter("title");
@@ -141,4 +137,9 @@ public class Cart extends HttpServlet {
 			session.setAttribute("total", total);
 			request.getRequestDispatcher("cart.jsp").forward(request, response);
 		}
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
+	
 	}
