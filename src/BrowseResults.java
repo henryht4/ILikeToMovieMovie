@@ -1,13 +1,8 @@
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.annotation.Resource;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -153,8 +148,6 @@ public class BrowseResults extends HttpServlet {
 	
 		ArrayList<Movie> movies = new ArrayList<Movie>();
 		
-			
-
 		try {
 			//public ArrayList<Movie> browseByGenre(String genre, String orderBy, String sort, String limit, String offset)
 			movies = query.browseByGenre(genre, orderSession, sort, limit, offset);
@@ -166,9 +159,24 @@ public class BrowseResults extends HttpServlet {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println(movies.get(1).getTitle());
-			
+		ArrayList<String> genreList = new ArrayList<String>();
+		genreList.add("Action");
+		genreList.add("Horror");
 		
+		ArrayList<StarListing> stars = new ArrayList<StarListing>();
+		
+		StarListing star = new StarListing("id", "name");
+		StarListing s1 = new StarListing("id1","Jackie Chan");
+		stars.add(star);
+		stars.add(s1);
+		
+		Movie movie = new Movie("id1", "Title1", 2017, "Director1", genreList, stars, (float)10.00);
+		Movie movie1 = new Movie("id2", "Title2", 2016, "Director2", genreList, stars,(float)9.5);
+		Movie movie2 = new Movie("id3", "Title3", 2015, "Director3", genreList, stars, (float)8.0);
+        movies.add(movie);
+        movies.add(movie1);
+        movies.add(movie2);
+        
 		session.setAttribute("page", pgNo);
 		session.setAttribute("movies", movies);
 		session.setAttribute("command", command);
@@ -177,6 +185,9 @@ public class BrowseResults extends HttpServlet {
 		session.setAttribute("sort",sort);
 		session.setAttribute("currentGenre", currentGenre);
 		session.setAttribute("limit", limit);
+		session.setAttribute("stars", stars);
+		session.setAttribute("genres", genreList);
+		
 		request.getRequestDispatcher("browseGenreDisplay.jsp").forward(request, response);
 		}		
 

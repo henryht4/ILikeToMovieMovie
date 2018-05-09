@@ -1,41 +1,24 @@
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-10 col-md-offset-1">
-            <table class="table table-hover">     
-				<tbody>
-					<c:forEach var="movie" items="${movies}">
-						<tr>
-							<div class="media">
-								<div class="media-body">
-									<ul style="list-style-type:none">
-										<li>ID: ${m.id}
-										<li>Title: <a href="hyperlinkedmovie?id=${movie.id}">${movie.title}</a></li>
-										<li>Year: ${movie.year}</li>
-										<li>Director: ${movie.director}</li>
-										<li class="horizontal">Genres:</li>
-										<c:forEach var="genre" items="${movie.genres}">
-											<li class="horizontal"><a
-												href="browseresults?genre=${genre}">${genre}</a></li>
-											<li class="horizontal">,</li>
-										</c:forEach>
-										<br>
-										<li class="horizontal">Stars:</li>
-										<c:forEach var="star" items="${movie.stars}">
-											<li class="horizontal"><a
-												href="hyperlinkedstar?id=${star.id}">${star.firstName}
-													${star.lastName}</a></li>
-											<li class="horizontal">,</li>
-										</c:forEach>
-										<li>Price: $5</li>
-										<li><a href="cart?title=${movie.title}&id=${movie.id}" class="btn btn-primary">Add to cart</a></li>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+
+<ul style="list-style-type:none">
+	<li>ID: ${id}
+	<li>Title: ${title}</a></li>
+	<li>Year: ${year}</li>
+	<li>Director: ${director}</li>
+	<li>Genres: ${genres}</li>
+	<li>Stars:${stars}</li>
+	<li>Price: $5</li>
+	<li><a href="cart?title=${movie.title}&id=${movie.id}" class="btn btn-primary">Add to cart</a></li>
 						
-									</ul>
-								</div>
-							</div>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-        </div>
-    </div>
-</div>
+	</ul>
+</html>
