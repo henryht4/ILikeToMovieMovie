@@ -24,15 +24,6 @@ import java.util.Map;
 import java.io.*;
 
 //import helper classes to use helper functions 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-import helper.MovieListing;
-=======
-<<<<<<< HEAD
-import helper.MoveListing;
->>>>>>> 66e8569ed8706e9f0122ab00f44f0f32180e9f41
->>>>>>> d4973bbea00c0e1d763933289e7e1c2a69d5705f
 import helper.MovieListing;
 import helper.CartItem;
 import helper.ItemsInCart;
@@ -60,7 +51,6 @@ public class Cart extends HttpServlet {
 			ArrayList<CartItem> items = (ArrayList<CartItem>) session.getAttribute("items");
 			ItemsInCart updateCart = new ItemsInCart();
 
-<<<<<<< HEAD
 			//if a purchase has been made, clear the cart
 			if(updateCart.getCartStatus() == true)
 			{
@@ -72,12 +62,6 @@ public class Cart extends HttpServlet {
 			String id = "";
 			if(movieId != null)
 				id = deleteItem(id);
-=======
-			//if movieId does exist, then we parse the string
-			String id = "";
-			if(movieId != null)
-				id = parse(id);
->>>>>>> d4973bbea00c0e1d763933289e7e1c2a69d5705f
 			//initialize the arraylist
 			if(items == null)
 				items = new ArrayList<CartItem>();
@@ -94,16 +78,7 @@ public class Cart extends HttpServlet {
 				}
 			}
 			
-<<<<<<< HEAD
 			if(title != null & id != "") {
-=======
-<<<<<<< HEAD
-			if(title != null & id != "") {
-=======
-			if(title != null & id != 0) {
-<<<<<<< HEAD
->>>>>>> 66e8569ed8706e9f0122ab00f44f0f32180e9f41
->>>>>>> d4973bbea00c0e1d763933289e7e1c2a69d5705f
 				MovieListing movie = new MovieListing(id, title);
 				
 				//if the arraylist is not empty
@@ -138,7 +113,6 @@ public class Cart extends HttpServlet {
 			
 			//if delete gets called
 			if (delete != null) {
-<<<<<<< HEAD
 				String deleteId = deleteItem(delete);
 				int index = -1;
 				
@@ -147,11 +121,6 @@ public class Cart extends HttpServlet {
 							index = i;
 					}
 				
-=======
-				String deleteId = parse(delete);
-				int index = -1;
-	
->>>>>>> d4973bbea00c0e1d763933289e7e1c2a69d5705f
 				//remove the item from the arraylist
 				if (index != -1) {
 				items.remove(index);
@@ -182,19 +151,11 @@ public class Cart extends HttpServlet {
 			
 		}
 	
-<<<<<<< HEAD
 	private String deleteItem(String id) {
 		return null;
 	}
 	
 	
-=======
-	private String parse(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
->>>>>>> d4973bbea00c0e1d763933289e7e1c2a69d5705f
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}

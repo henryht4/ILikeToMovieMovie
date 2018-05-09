@@ -45,7 +45,6 @@
   <servlet-mapping>
     <servlet-name>Cart</servlet-name>
     <url-pattern>/cart</url-pattern>
-<<<<<<< HEAD
    </servlet-mapping>
 
     <servlet>
@@ -58,7 +57,3 @@
     </servlet-mapping>
     
  </web-app>
-=======
-  </servlet-mapping>
-</web-app>
->>>>>>> d4973bbea00c0e1d763933289e7e1c2a69d5705f
