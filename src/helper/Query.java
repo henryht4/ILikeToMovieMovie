@@ -156,6 +156,7 @@ public class Query {
 					+ "FROM movies m, genres_in_moves gl, genres g, ratings r "
 					+ "WHERE r.movieId = m.id and gl.movieId = m.id and gl.genreId = g.id and g.name = ? "
 					+ "ORDER BY ? ? LIMIT ? OFFSET ?";
+			
 			PreparedStatement preparedQ = con.prepareStatement(query);
 			preparedQ.setString(1, genre);
 			preparedQ.setString(2, orderBy );
