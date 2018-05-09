@@ -24,8 +24,16 @@ import java.util.Map;
 import java.io.*;
 
 //import helper classes to use helper functions 
+<<<<<<< HEAD
 import helper.MovieListing;
+=======
+<<<<<<< HEAD
+import helper.MoveListing;
+>>>>>>> 66e8569ed8706e9f0122ab00f44f0f32180e9f41
 import helper.MovieListing;
+=======
+import helper.GrabMovie;
+>>>>>>> changedName
 import helper.MovieQuantity;
 
 
@@ -69,8 +77,16 @@ public class Cart extends HttpServlet {
 				}
 			}
 			
+<<<<<<< HEAD
 			if(title != null & id != "") {
+=======
+			if(title != null & id != 0) {
+<<<<<<< HEAD
+>>>>>>> 66e8569ed8706e9f0122ab00f44f0f32180e9f41
 				MovieListing movie = new MovieListing(id, title);
+=======
+				GrabMovie movie = new GrabMovie(id, title);
+>>>>>>> changedName
 				
 				//if the arraylist is not empty
 				if(!items.isEmpty()) {
