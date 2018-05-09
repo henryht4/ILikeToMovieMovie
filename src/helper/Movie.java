@@ -4,14 +4,21 @@ import java.util.ArrayList;
 
 public class Movie {
 	
-	String id;
-	String title;
-	Integer year;
-	String director;
+	private String id;
+	private String title;
+	private String year;
+	private String director;
 	private ArrayList<String> listOfGenres;
 	private ArrayList<StarListing> listOfStars;
-	Float rating;
+	private String rating;
 	
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getTitle() {
 		return title;
 	}
@@ -19,10 +26,10 @@ public class Movie {
 		this.title = title;
 	}
 	
-	public Integer getYear() {
+	public String getYear() {
 		return year;
 	}
-	public void setYear(Integer year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
 	
@@ -41,23 +48,24 @@ public class Movie {
 		return listOfGenres; 
 	}
 	
-	public Float getRating() {
+	public String getRating() {
 		return rating;
 	}
 	
-	public void setRating(Float rating) {
+	public void setRating(String rating) {
 		this.rating = rating;
 	}
 	
-	public Movie(String id, String title, Integer year, String director, ArrayList<String> genres, ArrayList<StarListing> stars, Float rating) {
+	public Movie(String id, String title, String year, String director, String rating, ArrayList<String> genres, ArrayList<StarListing> stars) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.year = year;
+		this.rating = rating;
 		this.director = director;
 		this.listOfGenres = genres;
 		this.listOfStars= stars;
-		this.rating = rating;
+		
 	}
 	
 }

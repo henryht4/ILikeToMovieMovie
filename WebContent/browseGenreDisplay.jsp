@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -32,21 +33,17 @@
  </ul>
 </div>
 
+<%@ include file="displayMovies.jsp"%>
 
-<h3> My name is ${examplename}</h3>
+
 <h3> Command: ${command} </h3>
 <h3> Genre: ${genre}</h3>
 <h3> Order By: ${orderBy}</h3>
 <h3>Sort: ${sort}</h3>
 <h3>currentGenre: ${currentGenre}</h3>
 <h3>Limit: ${limit}</h3>
-<h3>Movies: ${movies}</h3>
 <h3>Stars: ${stars}</h3>
 <h3>Genres: ${genres}</h3>
-
-
-<%@ include file="displayMovies.jsp"%>
-
 
 <div style="text-align: center">
 	<nav aria-label="pagination">
