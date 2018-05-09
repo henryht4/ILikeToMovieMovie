@@ -24,7 +24,7 @@ import java.util.Map;
 import java.io.*;
 
 //import helper classes to use helper functions 
-import helper.MoveListing;
+import helper.MovieListing;
 import helper.MovieListing;
 import helper.MovieQuantity;
 
@@ -50,9 +50,9 @@ public class Cart extends HttpServlet {
 			ArrayList<MovieQuantity> items = (ArrayList<MovieQuantity>) session.getAttribute("items");
 
 			//if movieId does exist, then we parse the string
-			String id = 0;
+			String id = "";
 			if(movieId != null)
-				id = Integer.parseInt(movieId);
+				id = parse(id);
 			//initialize the arraylist
 			if(items == null)
 				items = new ArrayList<MovieQuantity>();
@@ -61,7 +61,7 @@ public class Cart extends HttpServlet {
 			if(update != null) {
 				for(MovieQuantity i : items) 
 				{
-					String q = request.getParameter(Integer.toString(i.getMovie().getId()));
+					String q = request.getParameter(i.getMovie().getId());
 					int newQuantity = 0;
 					if(q != null)
 						newQuantity = Integer.parseInt(q);
@@ -69,7 +69,7 @@ public class Cart extends HttpServlet {
 				}
 			}
 			
-			if(title != null & id != 0) {
+			if(title != null & id != "") {
 				MovieListing movie = new MovieListing(id, title);
 				
 				//if the arraylist is not empty
@@ -104,14 +104,9 @@ public class Cart extends HttpServlet {
 			
 			//if delete gets called
 			if (delete != null) {
-				int deleteId = Integer.parseInt(delete);
+				String deleteId = parse(delete);
 				int index = -1;
-				
-				for (int i = 0; i < items.size(); i++) {
-					if (items.get(i).getMovie().getId() == deleteId)
-							index = deleteId;
-					}
-				
+	
 				//remove the item from the arraylist
 				if (index != -1) {
 				items.remove(index);
@@ -139,6 +134,11 @@ public class Cart extends HttpServlet {
 			request.getRequestDispatcher("cart.jsp").forward(request, response);
 		}
 	
+	private String parse(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}

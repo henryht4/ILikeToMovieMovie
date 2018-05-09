@@ -22,12 +22,8 @@ import helper.Query;
 
 
 
-/**
- * Servlet implementation class GenreSearchResults
- */
 @WebServlet(name = "/BrowseResults")
 public class BrowseResults extends HttpServlet {
-	
 
 	private static final long serialVersionUID = 1L;
 
@@ -37,17 +33,10 @@ public class BrowseResults extends HttpServlet {
 	@Resource(name = "jdbc/moviedb")
     private DataSource dataSource;
     
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public BrowseResults() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request, response);
 	}
@@ -72,23 +61,132 @@ public class BrowseResults extends HttpServlet {
 	    }
 	    
 	 void browsegenrefunction(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
-		 RequestDispatcher dispatch = request.getRequestDispatcher("browseGenreDisplay.jsp");
-		 dispatch.forward(request,response);
-		 response.setContentType("text/html");    // Response mime type
+		 HttpSession session = request.getSession(true); 
+		 Query query = new Query();
+		 
+		 //command is 
+		 String command = (String) session.getAttribute("command");
+			if (command == null)
+				command = "genre";
+		
+		//genreReq is
+		String genreReq = request.getParameter("req");
+		if (genreReq == null)
+			genreReq = "genre";
+		
+		//genre grabs the genre from search form
+		String genre = request.getParameter("genre");
+		if (genre == null) {
+			genre = "";
+		}
+			
+		String currentGenre = (String) session.getAttribute("currentGenre");
+		if (currentGenre == null) 
+			currentGenre = genre;
+		
+		
+		String sort =(String) session.getAttribute("sort");
+		if (sort == null) {
+			sort = "ASC";
+		}
+	
+		String orderOn = request.getParameter("orderBy");
+		String orderSession = (String) session.getAttribute("orderBy");
+		
+		if (orderOn == null & orderSession == null)
+			orderSession = "title";
+		else if (orderSession != null & orderOn != null) {
+			if (orderSession.equals(orderOn)) {
+				//if (sort.equals("ASC"))
+				//	sort = "DESC";
+				//else if (sort.equals("DESC"))
+				//	sort="ASC";
+			}
+			else 
+				orderSession = orderOn;			
+		}
+		else if(orderSession == null & orderOn != null)
+			orderSession = orderOn;
+				 
+		String limit = request.getParameter("limit");
+			if (limit == null) 
+				limit = (String) session.getAttribute("limit");
+				
+			if (limit == null) 
+				limit = "10";
+								
+			String page = request.getParameter("page");
+			Integer pgNo= new Integer(1);
+			if (page == null)
+				pgNo = (Integer) session.getAttribute("page");
+			else
+				pgNo = Integer.parseInt(page);
 
-        // Output stream to STDOUT
-        PrintWriter out = response.getWriter();
+			if (pgNo == null)
+				pgNo = 1;
+			
+			
+		if (!command.equals(genreReq) || pgNo < 1 || !currentGenre.equals(genre)) {
+			pgNo = 1;
+			command = genreReq;
+			currentGenre = genre;
+		}
 
-        //css
-        out.println("<HTML><head>"+
-        		"<link rel=\"stylesheet\" href=\"style.css\">" + 
-        		"</head>"
-        		);
+	
+
+		String paging = request.getParameter("paging");
+		if (paging == null) {
+			paging = "";
+		}
+
+		if (pgNo == 1 & paging.equals("previous"))
+			paging = "";
+
+		if (paging.equals("previous")) {
+			pgNo = pgNo - 1;
+		} else if (paging.equals("next")) {
+			pgNo = pgNo + 1;
+		}
+			
+		int offset = (pgNo - 1) * 10;
+			
+	
+		ArrayList<Movie> movies = new ArrayList<Movie>();
+		
+			
+
+		try {
+			//public ArrayList<Movie> browseByGenre(String genre, String orderBy, String sort, String limit, String offset)
+			movies = query.browseByGenre(genre, orderSession, sort, limit, offset);
+			if (movies.isEmpty()){
+				pgNo = pgNo - 1;
+				offset = (pgNo - 1) * 10;
+				movies = query.browseByGenre(genre, orderSession, sort, limit, offset);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		System.out.println(movies.get(1).getTitle());
+			
+		
+		session.setAttribute("page", pgNo);
+		session.setAttribute("movies", movies);
+		session.setAttribute("command", command);
+		session.setAttribute("genre", genre);
+		session.setAttribute("orderBy", orderSession);
+		session.setAttribute("sort",sort);
+		session.setAttribute("currentGenre", currentGenre);
+		session.setAttribute("limit", limit);
+		request.getRequestDispatcher("browseGenreDisplay.jsp").forward(request, response);
+		}		
+
+	 }
+
+
+
         
-        
+        /*
         // Building page head with title
-        out.println("<title>Movies By Genre Found:</title>");
-
 
        
         try {
@@ -195,7 +293,7 @@ public class BrowseResults extends HttpServlet {
         out.close();
     }
 
-
+*/
 /*
 	 void browsetitlefunction(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
 			response.setContentType("text/html");    // Response mime type
@@ -330,4 +428,3 @@ public class BrowseResults extends HttpServlet {
 	    }
 
 */
-}

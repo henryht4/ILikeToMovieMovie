@@ -20,5 +20,6 @@ public class MovieListing
 	public String getTitle() {
 		return title;
 	}
+
 	
 }
