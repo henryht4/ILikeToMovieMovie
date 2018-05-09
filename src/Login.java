@@ -66,7 +66,6 @@ public class Login extends HttpServlet {
 			else {
 				
 				request.setAttribute("errorMessage", "Invalid username or password! Please try again");
-				System.out.println("wrong pw");
 				RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
 				rd.forward(request, response);
 			}

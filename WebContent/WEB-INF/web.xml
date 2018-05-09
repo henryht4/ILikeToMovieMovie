@@ -52,6 +52,14 @@
     <servlet-name>Cart</servlet-name>
     <url-pattern>/cart</url-pattern>
     </servlet-mapping>
-    
+
+    <servlet>
+    <servlet-name>checkout</servlet-name>
+    <servlet-class>checkout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkout</servlet-name>
+    <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
     
 </web-app>

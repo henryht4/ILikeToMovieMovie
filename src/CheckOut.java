@@ -23,16 +23,63 @@ import java.util.List;
 import java.util.Map;
 import java.io.*;
 
+//import helper classes
+import helper.CheckOutInfo;
+import helper.SaleActions;
+import helper.ItemsInCart;
 
-public class CheckOut {
+
+@WebServlet("/CheckOut")
+
+public class CheckOut extends HttpServlet{
 
 
 		protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
 			HttpSession session = request.getSession(true);
 			
+			Boolean saleStatus = false; //initialize sale status 
 			
+			CheckOutInfo info = new CheckOutInfo(
+					request.getParameter("firstName"),
+					request.getParameter("lastName"),
+					request.getParameter("customerID"),
+					request.getParameter("creditCard"),
+					request.getParameter("expDate"));
+			
+			
+			SaleActions saleAction = new SaleActions(); //instance of saleAction class
+			ItemsInCart cart = new ItemsInCart(); //use this to get the cart Arraylist
+			
+			try {
+				saleStatus = saleAction.checkCustomerInfo(cart, info);
+
+				if(saleStatus == true && cart.getItemsList() != null) {
+					session.setAttribute("purchaseSuccess", "Your order was successfully placed!");
+					cart.emptyCart();//empty cart after purchase
+					RequestDispatcher rd = request.getRequestDispatcher("/confirmation.jsp");
+					rd.forward(request, response);
+					
+				}
+				//if there's nothing in the arraylist, checkout does not go through
+				else if(cart.getItemsList() == null) {
+					session.setAttribute("emptyCart", "There's nothing in your cart to check out!");
+				}
+				//if customer's information does not match, then 
+				else {
+					session.setAttribute("purchaseFail", "The information you entered was incorrect! Please try again");
+					System.out.println("---Wrong User Info---");
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			}
 		}
-	
-	
-	
+		
+		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			doGet(request, response);
+			request.getRequestDispatcher("/checkout.jsp").forward(request, response);
+
+		}
 }
+

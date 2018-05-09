@@ -53,10 +53,10 @@
 					
 					<tr class="spacing">
 						<td><button type="submit" class="btn btn-default"> Update Cart </button></td>
-						<td><a class="btn btn-default" style="background-color:red; color: #ffffff" href="cart?removeAll=true">
-									Remove All
+						<td><a class="btn btn-default" style="background-color:#ff7a7a; color: #ffffff" href="cart?deleteAll=true">
+									Delete All
 						</a></td>
-						<td><a class="btn btn-default" style="background-color:#1eff9f" href="checkout.jsp">
+						<td><a class="btn btn-default" style="background-color:#000000; color: #ffffff" href="checkout.jsp">
 								Proceed to Checkout
 						</a></td>
 					</tr>

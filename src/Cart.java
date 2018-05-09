@@ -24,14 +24,11 @@ import java.util.Map;
 import java.io.*;
 
 //import helper classes to use helper functions 
-<<<<<<< HEAD
-import helper.MoveListing;
 import helper.MovieListing;
-=======
-import helper.GrabMovie;
->>>>>>> changedName
-import helper.MovieQuantity;
+import helper.CartItem;
+import helper.ItemsInCart;
 
+@WebServlet("/Cart")
 
 public class Cart extends HttpServlet {
 	
@@ -50,22 +47,30 @@ public class Cart extends HttpServlet {
 			String update = request.getParameter("update");
 		
 			
-			//arraylist of movies from MovieQuantity
-			ArrayList<MovieQuantity> items = (ArrayList<MovieQuantity>) session.getAttribute("items");
+			//arraylist of movies from CartItem
+			ArrayList<CartItem> items = (ArrayList<CartItem>) session.getAttribute("items");
+			ItemsInCart updateCart = new ItemsInCart();
 
-			//if movieId does exist, then we parse the string
-			String id = 0;
+			//if a purchase has been made, clear the cart
+			if(updateCart.getCartStatus() == true)
+			{
+				items.clear();
+				updateCart.resetCartStatus(); //resetCartStatus to false
+			}
+
+			//if movieId does exist, then we delete the item
+			String id = "";
 			if(movieId != null)
-				id = Integer.parseInt(movieId);
+				id = deleteItem(id);
 			//initialize the arraylist
 			if(items == null)
-				items = new ArrayList<MovieQuantity>();
+				items = new ArrayList<CartItem>();
 			
 			//checks for any update for item already existing in cart
 			if(update != null) {
-				for(MovieQuantity i : items) 
+				for(CartItem i : items) 
 				{
-					String q = request.getParameter(Integer.toString(i.getMovie().getId()));
+					String q = request.getParameter(i.getMovie().getId());
 					int newQuantity = 0;
 					if(q != null)
 						newQuantity = Integer.parseInt(q);
@@ -73,12 +78,8 @@ public class Cart extends HttpServlet {
 				}
 			}
 			
-			if(title != null & id != 0) {
-<<<<<<< HEAD
+			if(title != null & id != "") {
 				MovieListing movie = new MovieListing(id, title);
-=======
-				GrabMovie movie = new GrabMovie(id, title);
->>>>>>> changedName
 				
 				//if the arraylist is not empty
 				if(!items.isEmpty()) {
@@ -94,7 +95,7 @@ public class Cart extends HttpServlet {
 					//if the movie object is not in the arraylist, add new movie object with quantity 1
 					if (index == -1)
 					{
-						MovieQuantity item = new MovieQuantity(movie, 1);
+						CartItem item = new CartItem(movie, 1);
 						items.add(item);
 					}
 					//if movie object already exists in arraylist
@@ -104,7 +105,7 @@ public class Cart extends HttpServlet {
 				}
 				//if the arraylist is empty
 				else {
-					MovieQuantity item = new MovieQuantity(movie, 1);
+					CartItem item = new CartItem(movie, 1);
 					items.add(item);
 				}
 				
@@ -112,12 +113,12 @@ public class Cart extends HttpServlet {
 			
 			//if delete gets called
 			if (delete != null) {
-				int deleteId = Integer.parseInt(delete);
+				String deleteId = deleteItem(delete);
 				int index = -1;
 				
 				for (int i = 0; i < items.size(); i++) {
 					if (items.get(i).getMovie().getId() == deleteId)
-							index = deleteId;
+							index = i;
 					}
 				
 				//remove the item from the arraylist
@@ -136,16 +137,24 @@ public class Cart extends HttpServlet {
 				empty = "Empty Cart";
 			
 			int total = 0;
-			for(MovieQuantity i : items){
-				total += i.getQuantity()*5;
+			for(CartItem i : items){
+				total += i.getQuantity()*10;
 			}
 			
+			//update ItemsInCart to be used for checkout
+			updateCart.setItemsList(items);
 			
 			session.setAttribute("emptyCart", empty);
 			session.setAttribute("items", items);
 			session.setAttribute("total", total);
 			request.getRequestDispatcher("cart.jsp").forward(request, response);
+			
 		}
+	
+	private String deleteItem(String id) {
+		return null;
+	}
+	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
