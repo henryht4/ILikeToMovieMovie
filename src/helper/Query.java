@@ -19,7 +19,7 @@ public class Query {
 	@Resource(name = "jdbc/moviedb")
     private DataSource dataSource;
 	
-	public ArrayList<Movie>getResults(Movie movie, String orderBy, String sort, String limit) throws Exception{
+	public ArrayList<Movie>getResults(Movie movie, String orderBy, String sort, String limit, int offset) throws Exception{
 		ArrayList<Movie> listOfMovies = new ArrayList<Movie>();
 		try {
 			Connection con = dataSource.getConnection();
@@ -41,7 +41,7 @@ public class Query {
            
             // Perform the query
             ResultSet rs = statement.executeQuery(query);
-            listOfMovies = getMovieList(rs);
+            listOfMovies = getMovieData(rs);
             con.close();
             
 		}catch(Exception e) {
@@ -51,7 +51,7 @@ public class Query {
 	}
 	
 
-	public ArrayList<Movie>getMovieList(ResultSet rs) throws Exception{
+	public ArrayList<Movie>getMovieData(ResultSet rs) throws Exception{
 		ArrayList<Movie> listOfMovies = new ArrayList<Movie>();
 		while(rs.next()) {
 			String movieID = rs.getString("id");
@@ -70,14 +70,35 @@ public class Query {
 	
 	}
 	
+	public Movie getMovie(String movieId) throws Exception {
+		Connection con = dataSource.getConnection();
+		String query = "Select * from movies m, rating r where mid = " + movieId + "r.movieId = " + movieId;
+		Statement select = con.createStatement();
+		ResultSet rs = select.executeQuery(query);
+		rs.next();
+		String movieID = rs.getString("id");
+        String movieTitle = rs.getString("title");
+        Integer movieYear = rs.getInt("year");
+        String movieDirector = rs.getString("director");
+        ArrayList<String>listOfGenres = new ArrayList<String>();
+        listOfGenres = getGenres(movieID);
+        ArrayList<StarListing> listOfStars = new ArrayList<StarListing>();
+        listOfStars = getStars(movieID);
+        Float movieRating = rs.getFloat("rating");
+        Movie movie = new Movie(movieID, movieTitle, movieYear, movieDirector, listOfGenres, listOfStars, movieRating);
+		
+		return movie;
+	}
+	
+
+	
+	
 	
 	public ArrayList<StarListing> getStars(String movieId) {
 		ArrayList<StarListing> stars = new ArrayList<StarListing>();
 		ResultSet rs = null;
 		try {
 			Connection con = dataSource.getConnection();
-            Statement statement = con.createStatement();
-            
             String query = "SELECT s.id, s.name "
             		+ "FROM stars s, stars_in_movies sl"
     				+ "WHERE sl.starId = s.id  AND sl.movieId = " + movieId;
@@ -91,8 +112,7 @@ public class Query {
     			stars.add(star);
     		}
     		con.close();
-    		statement.close();
-    		
+    
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -132,8 +152,7 @@ public class Query {
 		ArrayList<Movie> movies = new ArrayList<Movie>();
 		try {
 			Connection con = dataSource.getConnection();
-			Statement statement = con.createStatement();
-			String query = "SELECT * "
+			String query = "SELECT m.id, m.title, m.year, m.director, r.rating "
 					+ "FROM movies m, genres_in_moves gl, genres g, ratings r "
 					+ "WHERE r.movieId = m.id and gl.movieId = m.id and gl.genreId = g.id and g.name = ? "
 					+ "ORDER BY ? ? LIMIT ? OFFSET ?";
@@ -145,9 +164,8 @@ public class Query {
 			preparedQ.setInt(5, offset);
 			
 			ResultSet rs = preparedQ.executeQuery();
-			movies = getMovieList(rs);
+			movies = getMovieData(rs);
 			con.close();
-			statement.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -175,7 +193,7 @@ public class Query {
             preparedQ.setString(5, offset);
             
             ResultSet rs = preparedQ.executeQuery();
-            movies = getMovieList(rs);
+            movies = getMovieData(rs);
             
             con.close();
             statement.close();
