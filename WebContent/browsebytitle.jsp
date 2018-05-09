@@ -57,7 +57,10 @@
  			
  		
  		</select>
-  		
+  		<br>
+  		 <input type = "radio" name = "orderBy" value = "title" checked> Sort Results on Title 
+ 		 <br>
+ 		 <input type = "radio" name = "orderBy" value = "rating" > Sort Results on Rating
   		
  		 <br>
  		 Select # of Movies to Display Per Page
@@ -69,9 +72,11 @@
  		 <br>
  		 
  		 Sort Rating in ASC/DESC order
- 		 <input type = "radio" name = "order" value = "ASC" checked> ASC
- 		 <input type = "radio" name = "order" value = "DESC"/> DESC
+ 		 <input type = "radio" name = "sort" value = "ASC" checked> ASC
+ 		 <input type = "radio" name = "sort" value = "DESC"/> DESC
  		 <br><br>
+ 		 
+ 		
  		 <input type="SUBMIT" value = "Search">
  		 
   	</form>

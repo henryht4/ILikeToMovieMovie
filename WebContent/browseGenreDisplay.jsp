@@ -36,15 +36,6 @@
 <%@ include file="displayMovies.jsp"%>
 
 
-<h3> Command: ${command} </h3>
-<h3> Genre: ${genre}</h3>
-<h3> Order By: ${orderBy}</h3>
-<h3>Sort: ${sort}</h3>
-<h3>currentGenre: ${currentGenre}</h3>
-<h3>Limit: ${limit}</h3>
-<h3>Stars: ${stars}</h3>
-<h3>Genres: ${genres}</h3>
-
 <div style="text-align: center">
 	<nav aria-label="pagination">
 		<ul class="pagination">

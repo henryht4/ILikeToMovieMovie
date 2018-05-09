@@ -42,6 +42,7 @@
   <servlet-mapping>
     <servlet-name>BrowseResults</servlet-name>
     <url-pattern>/browsegenreresults</url-pattern>
+    <url-pattern>/browsetitleresults</url-pattern>
   </servlet-mapping>
   
   <servlet>

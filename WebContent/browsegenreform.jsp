@@ -50,8 +50,30 @@
  		 <option value="War"> War<br></option>
  		 <option value="Western"> Western<br></option>
  		 </select>
+ 		 <br><br>
+ 		 
+ 		 Select Order to Display Results <br>
+ 		 <select name = "sort">
+  		 <option value="ASC"> ASC</option>
+  		 <option value="DESC"> DESC<br></option>
+  		 </select>
+  		 <br><br>
+		
+		Select # of Movies to Display Per Page <br>
+		<input type="radio" name="limit" value="10" checked> 10 
+ 		<input type="radio" name="limit" value="15"> 15
+  		<input type="radio" name="limit" value="20"> 20
+  		<input type="radio" name="limit" value="25"> 25
+  		<input type="radio" name="limit" value="50"> 50
+ 		 
+ 		 <br><br>
+ 		 
+ 		 <input type = "radio" name = "orderBy" value = "title" checked> Sort Results on Title 
  		 <br>
-
+ 		 <input type = "radio" name = "orderBy" value = "rating" > Sort Results on Rating
+ 		 
+ 		 <br><br>
+ 		 
  		 <input type="SUBMIT" value = "Search">
  		 
  		 
