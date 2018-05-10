@@ -17,7 +17,8 @@
     </div>
     <ul class="nav navbar-nav">
       <li><a href="./login.jsp">Sign In</a></li>
-      <li><a href="browse.jsp">Browsing</a></li>
+      <li><a href="browse.jsp">Browse</a></li>
+      <li><a href="search.jsp">Search</a></li>
       <li><a href="cart.jsp"><img src ="cart.png" style="width:auto; height:30px;"></a></li>
     </ul>
   </div>

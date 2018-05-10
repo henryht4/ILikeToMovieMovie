@@ -79,7 +79,7 @@ public class Cart extends HttpServlet {
 			}
 			
 			if(title != null & id != "") {
-				MovieListing movie = new MovieListing(id, title);
+				MovieListing movie = new MovieListing();
 				
 				//if the arraylist is not empty
 				if(!items.isEmpty()) {

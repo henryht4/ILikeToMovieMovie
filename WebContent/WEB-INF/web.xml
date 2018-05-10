@@ -39,11 +39,11 @@
     <url-pattern>/browsetitleresults</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>Cart</servlet-name>
-    <servlet-class>Cart</servlet-class>
+    <servlet-name>cart</servlet-name>
+    <servlet-class>cart</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Cart</servlet-name>
+    <servlet-name>cart</servlet-name>
     <url-pattern>/cart</url-pattern>
    </servlet-mapping>
 

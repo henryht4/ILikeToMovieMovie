@@ -10,6 +10,11 @@ body {
     width:auto\9;
     margin:0px;
 }
+a:link{
+	color: #800040;
+	font-weight: bold;
+	
+}
 
 h {
 	padding-top: 100px;

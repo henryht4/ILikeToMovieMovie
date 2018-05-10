@@ -229,7 +229,7 @@ public class Query {
 			String movieId= rs.getString("id");
 			String movieTitle = rs.getString("title");
 			
-			MovieListing movie = new MovieListing(movieId, movieTitle);
+			MovieListing movie = new MovieListing();
 			movies.add(movie);
 			}
 		}catch(Exception e) {
