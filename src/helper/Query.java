@@ -107,12 +107,10 @@ public class Query{
 		result.next();
 		*/
 		
-<<<<<<< HEAD
 		//movies = getMovieData(result);
 		
 		return movies;
-=======
-		ResultSet rs = preparedQ.executeQuery(query);
+/*		ResultSet rs = preparedQ.executeQuery(query);
 		while(rs.next()) {
 			String movieId= rs.getString("id");
 			String movieTitle = rs.getString("title");
@@ -120,13 +118,11 @@ public class Query{
 			MovieListing movie = new MovieListing();
 			movies.add(movie);
 			}
->>>>>>> searchFiles
+*/
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return movies;
-		
 	}
-
 }
 
