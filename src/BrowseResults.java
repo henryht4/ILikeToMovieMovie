@@ -110,16 +110,19 @@ public class BrowseResults extends HttpServlet {
                 String movieDirector = rs.getString("director");
                 String movieRating = rs.getString("rating");
                 
-               
+                 
                 Statement GenreStatement = con.createStatement();
                 String GenreQuery = String.format("select g.name from movies m, genres_in_movies gl, genres g where gl.genreId = g.id and gl.movieId = m.id and m.id = '%s'",movieID);
                 ResultSet GenreSet = GenreStatement.executeQuery(GenreQuery);
+                
                 
                 while(GenreSet.next()) {
         			genres.add(GenreSet.getString("name"));
         			
         		}
                 
+                
+                //genres = getGenres(movieID);
         		Statement StarsStatement = con.createStatement();
         		String StarQuery = String.format("select s.id, s.name from movies m, stars_in_movies sl, stars s where sl.starId = s.id and sl.movieId = m.id and m.id = '%s'",movieID);
         		ResultSet StarSet = StarsStatement.executeQuery(StarQuery);
@@ -240,5 +243,25 @@ public class BrowseResults extends HttpServlet {
 		
 	}
 	
+	public ArrayList<String> getGenres(String id) throws Exception{
+		ArrayList<String> genres = new ArrayList<String>();
+		try {
+			
+			Connection con = dataSource.getConnection();
+			Statement GenreStatement = con.createStatement();
+			String GenreQuery = String.format("select g.name from movies m, genres_in_movies gl, genres g where gl.genreId = g.id and gl.movieId = m.id and m.id = '%s'",id);
+			ResultSet GenreSet = GenreStatement.executeQuery(GenreQuery);
+        
+        
+        while(GenreSet.next()) {
+			genres.add(GenreSet.getString("name"));
+        }
+		
+	}catch(Exception e) {
+    	e.printStackTrace();
+    }
+	return genres;
+	
+	}	
 }
 	
