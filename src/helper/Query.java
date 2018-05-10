@@ -110,12 +110,19 @@ public class Query{
 		//movies = getMovieData(result);
 		
 		return movies;
+/*		ResultSet rs = preparedQ.executeQuery(query);
+		while(rs.next()) {
+			String movieId= rs.getString("id");
+			String movieTitle = rs.getString("title");
+			
+			MovieListing movie = new MovieListing();
+			movies.add(movie);
+			}
+*/
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return movies;
-		
 	}
-
 }
 
