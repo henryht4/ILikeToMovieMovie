@@ -1,7 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import="model.Movie"%>
+<%@ page import="helper.MovieListing"%>
 <%@ page import="java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -16,7 +16,7 @@
 <body>
 		<h1>Movie Details</h1>
 		<table border="1px" width="600px">
-		<tr style="font-size: large; font-weight: bold">
+		<tr style="font-size: large; font-weight: bold" align="center">
 			<th>ID</th>
 			<th>Title</th>
 			<th>Year</th>
@@ -27,15 +27,15 @@
 		</tr>
 		
 	<%
-			ArrayList<Movie> movies=(ArrayList<Movie>) request.getSession().getAttribute("Movies");
+			ArrayList<MovieListing> movies=(ArrayList<MovieListing>) request.getSession().getAttribute("Movies");
 			String title= (String)request.getParameter("title");
 			
-			for(Movie movie:movies){
+			for(MovieListing movie:movies){
 				if(movie.getTitle().equalsIgnoreCase(title))
 				{
 	%>
-			<tr>
-				<td><%=movie.getID() %></td>
+			<tr align="center">
+				<td><%=movie.getId() %></td>
 				
 				<td><%= movie.getTitle() %></td>
 				<td><%=movie.getYear() %></td>
@@ -60,8 +60,7 @@
 			</tr>
 	<% 		}
 			}
-			
-			
+					
 	%>
 	</table>
 </body>

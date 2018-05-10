@@ -42,12 +42,7 @@ public class StarServlet extends HttpServlet {
       
         
         
-        out.println("<div class=\"w3-bar w3-black w3-padding-16\">");
-        out.println("<a href=\"#\" class=\"w3-bar-item w3-button \">Home</a>");
-        out.println("<a href=\"#\" class=\"w3-bar-item w3-button\">About</a>");
-        out.println("<a href=\"#\" class=\"w3-bar-item w3-button\">Contact</a>");
 
-        out.println("</div>");
         
         out.println("<head>");
         
@@ -57,7 +52,8 @@ public class StarServlet extends HttpServlet {
         
         out.println("<title>Single Star</title></head>");
         
-        
+        out.println("<%@include file=\"navbar.jsp\" %>");
+
         try {
         		
         		// create database connection
@@ -73,9 +69,9 @@ public class StarServlet extends HttpServlet {
         		out.println("<center>");
 
         		out.println("<body>");
-        		out.println("<h1 style=\"color:orange\">Details of star</h1>");
-        		
-        		out.println("<div>");
+        		out.println("<div class=\"container\">");
+
+        		out.println("<h1>Details of Star</h1>");
         		out.println("<table>");
         		
         		// add table header row
@@ -108,7 +104,7 @@ public class StarServlet extends HttpServlet {
         			out.println("<td><ul>");
         			for(int i=0; i< movieName.size();i++)
         			{
-        				out.println("<li><a href=\"SingleMovie.jsp?title="+ movieName.get(i) +"\">" + movieName.get(i)+"</a></li>");
+        				out.println("<li><a href=\"singleMovie.jsp?title="+ movieName.get(i) +"\">" + movieName.get(i)+"</a></li>");
         			}
         			out.println("</ul></td>");
         			out.println("<td>" + starName + "</td>");

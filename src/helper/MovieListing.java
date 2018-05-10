@@ -28,7 +28,7 @@ public class MovieListing {
 		return genreid;
 	}
 
-	public void setGenreid(String genreid) {
+	public void setGenreId(String genreid) {
 		this.genreid = genreid;
 	}
 
