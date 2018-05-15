@@ -1,86 +1,50 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="helper.DBConnection"%>
+<%@ page import="java.util.*"%>
+<%@ page import="java.sql.Connection"%>
+<%@ page import="java.sql.PreparedStatement"%>
+<%@ page import="java.sql.ResultSet"%>
+<%@ page import="java.sql.SQLException"%>
+<%@ page import="java.sql.Statement"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="en">
+
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Search Movies By Title Letter</title>
-  </head>
-  
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I Like To Movie Movie</title>
+</head>
+
 <%@include file="navbar.jsp"%>
 
 
 <link rel="stylesheet" href="style.css">
-  
 
-  <body>
-
-	<div class="div1" >
-    <h1 ALIGN = "CENTER">Browse by Letter</h1>
-  	<center>
-  	<form ACTION = "browsetitleresults" METHOD = "POST">
-  		<h5> Select A Letter:</h5>
-  		
-  		
-  		<select name="letter">
-  			<option value="A%">A</option>
- 			<option value="B%">B</option>
- 			<option value="C%">C</option>
- 			<option value="D%">D</option>
- 			<option value="E%">E</option>
- 			<option value="F%">F</option>
- 			<option value="G%">G</option>
- 			<option value="H%">H</option>
- 			<option value="I%">I</option>
- 			<option value="J%">J</option>
- 			<option value="K%">K</option>
- 			<option value="L%">L</option>
- 			<option value="M%">M</option>
- 			<option value="N%">N</option>
- 			<option value="O%">O</option>
- 			<option value="P%">P</option>
- 			<option value="Q%">Q</option>
- 			<option value="R%">R</option>
- 			<option value="S%">S</option>
- 			<option value="T%">T</option>
- 			<option value="U%">U</option>
- 			<option value="V%">V</option>
- 			<option value="W%">W</option>
- 			<option value="X%">X</option>
- 			<option value="Y%">Y</option>
- 			<option value="Z%">Z</option>
- 			
- 		
- 		</select>
-  		<br>
-  		 <input type = "radio" name = "orderBy" value = "title" checked> Sort Results on Title 
- 		 <br>
- 		 <input type = "radio" name = "orderBy" value = "rating" > Sort Results on Rating
-  		
- 		 <br>
- 		 Select # of Movies to Display Per Page
- 		 <input type = "radio" name = "limit" value = "5" checked> 5
- 		 <input type = "radio" name = "limit" value = "10"/> 10
- 		 <input type = "radio" name = "limit" value = "15"/> 15
- 		 <input type = "radio" name = "limit" value = "20"/> 20
- 		 <input type = "radio" name = "limit" value = "25"/> 25
- 		 <br>
- 		 
- 		 Sort Rating in ASC/DESC order
- 		 <input type = "radio" name = "sort" value = "ASC" checked> ASC
- 		 <input type = "radio" name = "sort" value = "DESC"/> DESC
- 		 <br><br>
- 		 
- 		
- 		 <input type="SUBMIT" value = "Search">
- 		 
-  	</form>
- 	</center>
-  	</div>
-  </body>
+<body>
+	<div class="div1"><center><a href="./login.jsp"><img src ="http://i68.tinypic.com/33ju1p4.png"></a></center>
+		
+		<h1>Browse By Title</h1>
+ 				<% Connection connection = DBConnection.getConnection();
+ 				String query = "SELECT distinct LEFT(title,1) from movies ORDER BY LEFT(title,1)";
+ 				PreparedStatement pst=connection.prepareStatement(query);
+ 				ResultSet result = pst.executeQuery();
+				while(result.next()){
+				
+				%>
+				
+					<a href="<%=request.getContextPath()%>/BrowseByTitle?letter=<%=result.getString(1) %>"> <%=result.getString(1) %> 
+					</a></br>
+				<%} %>
+			
+		
+		<%
+	
+		
+		if(request.getParameter("found")!=null){
+			out.write("<h2 style=\"color:orange\">No Result Found</h2>");
+		}
+	%>
+	</body>
 </html>

@@ -54,6 +54,32 @@
     <url-pattern>/cart</url-pattern>
    </servlet-mapping>
 
+  <display-name>BrowseByGenre</display-name>
+  <description>
+     >BrowseByGenre
+    </description>
+  <servlet>
+    <servlet-name>>BrowseByGenre</servlet-name>
+    <servlet-class>>BrowseByGenre</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>>BrowseByGenre</servlet-name>
+    <url-pattern>/>BrowseByGenre</url-pattern>
+  </servlet-mapping>
+  
+    <display-name>BrowseByTitle</display-name>
+  <description>
+     >BrowseByTitle
+    </description>
+  <servlet>
+    <servlet-name>>BrowseByTitle</servlet-name>
+    <servlet-class>>BrowseByTitle</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>>BrowseByTitle</servlet-name>
+    <url-pattern>/>BrowseByTitle</url-pattern>
+  </servlet-mapping>
+
     <servlet>
     <servlet-name>checkout</servlet-name>
     <servlet-class>checkout</servlet-class>

@@ -24,17 +24,27 @@
 
 <body>
 	<div class="div1"><center><a href="./login.jsp"><img src ="http://i68.tinypic.com/33ju1p4.png"></a></center>
+		
+		<h1>Browse By Genre</h1>
+ 				<% Connection connection = DBConnection.getConnection();
+ 				String query = "SELECT * FROM genres ORDER BY name";
+ 				PreparedStatement pst=connection.prepareStatement(query);
+ 				ResultSet result = pst.executeQuery();
+				while(result.next()){
+				request.getSession(true).setAttribute(result.getString("id"), result.getString("id"));
+				%>
+				
+					<a href="<%=request.getContextPath()%>/BrowseByGenre?genre=<%=result.getString("name") %>"> <%=result.getString("name") %> 
+					</a></br>
+				<%} %>
+			
+		
+		<%
 	
-	    <p>Welcome to our movie database!</p><br>
-    
-    
-    <h2>Browse Movies</h2>
-    
-    <button onclick="window.location.href='browseByGenre.jsp'">Browse By Genre</button>
-    
-    <button onclick="window.location.href='browseByTitle.jsp'">Browse By Title</button>
-	
-   
-	</div>
+		
+		if(request.getParameter("found")!=null){
+			out.write("<h2 style=\"color:orange\">No Result Found</h2>");
+		}
+	%>
 	</body>
 </html>

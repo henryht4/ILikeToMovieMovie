@@ -25,19 +25,9 @@
     
     <button onclick="window.location.href='browse.jsp'">Browse Movies</button>
     
-    <button onclick="window.location.href='searchform.html'">Search For Movies</button>
+    <button onclick="window.location.href='search.jsp'">Search For Movies</button>
 	
-    <!-- 
-    <p><a href = "http://localhost:8080/ILikeToMovieMovie/ratings">Link to Ratings</a></p>
-    <p><a href = "http://localhost:8080/ILikeToMovieMovie/searchform.html">Link to Search Form</a></p>
-    <p><a href = "http://localhost:8080/ILikeToMovieMovie/titleresult?title=">Link to Empty Title Result</a></p>
-    <p><a href = "http://localhost:8080/ILikeToMovieMovie/yearresult?year=">Link to Empty Year Result</a></p>
-    <p><a href = "http://localhost:8080/ILikeToMovieMovie/directorresult?director=">Link to Empty Director Result</a></p>
-    <p><a href = "http://localhost:8080/ILikeToMovieMovie/moviebystarresult?star=">Link to Empty Star Form</a></p>
-    <p><a href = "http://localhost:8080/ILikeToMovieMovie/genreform.html">Link to Genre Search Form</a></p>
-    <p><a href = "http://localhost:8080/ILikeToMovieMovie/genreresults?genre=">Link to Empty Genre Search Results</a></p>
-
-   -->
+   
 	</div>
     
 

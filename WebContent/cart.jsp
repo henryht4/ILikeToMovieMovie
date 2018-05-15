@@ -21,21 +21,21 @@
 			<h1>Shopping Cart</h1>
 			<h2>${emptyCart}</h2>
 			<center>
-			<form action="cart?update="true" method="POST">
+			<form action="Cart?update=true" method="POST">
 				<table>
 					<%--iterate through each "item" in the arraylist of movies in cart and display those movies --%>
 					<c:forEach var="item" items="${items}">
 						<tr>
 						<td>
 							<div>
-								<a href="singleMovie?id=${item.getMovie().getId()}">${item.getMovie().getTitle()}</a>
+								<a href="SingleMovie.jsp?title=${item.getMovie().getTitle()}">${item.getMovie().getTitle()}</a>
 							</div>
 						</td>
 							<td>Product: </td>
 							<td>Quantity: </td>
 							<td><input name="${item.getMovie().getId()}" value="${item.getQuantity()}" class="form-control" min="0"></td>
 							<td>Price: $10</td>
-							<td><a class="btn btn-default" href="cart?remove=${item.getMovie().getId()}">Remove</a>
+							<td><a class="btn btn-default" href="<%=request.getContextPath()%>\Cart?delete=true&id=${item.getMovie().getId()}">Remove</a>
 						</tr>
 					</c:forEach>
 					
@@ -52,8 +52,8 @@
 					<%-- Buttons/Submissions --%>
 					
 					<tr class="spacing">
-						<td><button type="submit" class="btn btn-default"> Update Cart </button></td>
-						<td><a class="btn btn-default" style="background-color:#ff7a7a; color: #ffffff" href="cart?deleteAll=true">
+						<td><button class="btn btn-lg btn-default btn-block login1" id="txtuser" type="submit"> Update Cart </button>   </td></td>
+						<td><a class="btn btn-default" style="background-color:#ff7a7a; color: #ffffff" href="<%=request.getContextPath()%>\Cart?deleteAll=true">
 									Delete All
 						</a></td>
 						<td><a class="btn btn-default" style="background-color:#000000; color: #ffffff" href="checkout.jsp">

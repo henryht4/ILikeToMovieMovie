@@ -9,21 +9,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title></title>
 </head>
+<%@include file="navbar.jsp"%>
 <body>
 
 
 <%
-//swap function to order by title
-System.out.print(request.getParameter("num"));
+		
+
 			ArrayList<MovieListing> movies=(ArrayList<MovieListing>) request.getSession().getAttribute("Movies"); 			
 
 			for (int i = 0; i < movies.size()-1; i++)
 			{
 			   int min = i;
 			   for (int j = i+1; j < movies.size(); j++)
-			         if (movies.get(j).getTitle().compareTo(movies.get(min).getTitle()) <= -1){
-			        	 min = j;
-			         }
+			         if (movies.get(j).getTitle().compareTo(movies.get(min).getTitle()) ==-1) min = j;
 			   MovieListing temp = movies.get(i);
 			   movies.set(i,movies.get(min));
 			   movies.set(min,temp) ;

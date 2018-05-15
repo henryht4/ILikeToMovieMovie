@@ -49,7 +49,7 @@ public class Cart extends HttpServlet {
 			
 			//arraylist of movies from CartItem
 			ArrayList<CartItem> items = (ArrayList<CartItem>) session.getAttribute("items");
-			ItemsInCart updateCart = new ItemsInCart();
+		/*	ItemsInCart updateCart = new ItemsInCart();
 
 			//if a purchase has been made, clear the cart
 			if(updateCart.getCartStatus() == true)
@@ -64,7 +64,7 @@ public class Cart extends HttpServlet {
 				id = deleteItem(id);
 			//initialize the arraylist
 			if(items == null)
-				items = new ArrayList<CartItem>();
+				items = new ArrayList<CartItem>();*/
 			
 			//checks for any update for item already existing in cart
 			if(update != null) {
@@ -72,13 +72,15 @@ public class Cart extends HttpServlet {
 				{
 					String q = request.getParameter(i.getMovie().getId());
 					int newQuantity = 0;
-					if(q != null)
+					
+					if(q != null && i.getQuantity()!=Integer.parseInt(q))
+						
 						newQuantity = Integer.parseInt(q);
 						i.setQuantity(newQuantity);
 				}
 			}
 			
-			if(title != null & id != "") {
+		/*	if(title != null & id != "") {
 				MovieListing movie = new MovieListing();
 				
 				//if the arraylist is not empty
@@ -110,25 +112,30 @@ public class Cart extends HttpServlet {
 				}
 				
 			}
-			
+			*/
 			//if delete gets called
 			if (delete != null) {
 				String deleteId = deleteItem(delete);
 				int index = -1;
 				
 				for (int i = 0; i < items.size(); i++) {
-					if (items.get(i).getMovie().getId() == deleteId)
+					if (items.get(i).getMovie().getId().equals(movieId))
 							index = i;
 					}
 				
 				//remove the item from the arraylist
 				if (index != -1) {
 				items.remove(index);
+				
 				}
+				
+				
+			//	session.setAttribute("emptyCart", empty);
+				
 			}
 			
 			//delete all items in the arraylist
-			if (deleteAll != null) {
+			else if (deleteAll != null) {
 				items.clear();
 			}
 			
@@ -142,7 +149,7 @@ public class Cart extends HttpServlet {
 			}
 			
 			//update ItemsInCart to be used for checkout
-			updateCart.setItemsList(items);
+//			//updateCart.setItemsList(items);
 			
 			session.setAttribute("emptyCart", empty);
 			session.setAttribute("items", items);
