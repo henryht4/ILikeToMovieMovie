@@ -108,22 +108,22 @@
     
   <form action="SearchServlet" method="post">
       <!--title-->
-     <div id="second"> <h4>Title:</h4><br></div>
+     <div id="second"> Title:</div>
       <div id="align"><input type="text" name="title" value="" onkeypress="return onlyAlphabets(event,this);" /></div>
   <br>
       <!--year-->
-      <div id="third"><h4>Year:</h4><br></div>
+      <div id="third">Year:</div>
       <div id="align"><input type="text" name="year" value="" onkeypress="return onlyNos(event,this)" /></div>
   <br>
       <!--director-->
-      <div id="fourth"><h4>Director:</h4><br></div>
+      <div id="fourth">Director:</div>
       <div id="align"><input type="text" name="director" value="" onkeypress="return onlyAlphabets(event,this);" /></div>
   <br>
       <!--star name-->
-      <div id="fifth"><h4>Star name:</h4><br></div>
+      <div id="fifth">Star name:</div>
       <div id="align"><input type="text" name="starName" value="" onkeypress="return onlyAlphabets(event,this); " /></div>
   <br><br>
-      <button class="btn btn-lg btn-default btn-block login1" id="txtuser" type="submit" name ="search"><span class="glyphicon glyphicon-log-in"></span> Search </button>   
+      <button class="btn btn-lg btn-default" id="txtuser" type="submit" name ="search"> Search </button>   
 </form> 
 
 <h2>${errorMessage}</h2>

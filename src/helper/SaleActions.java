@@ -30,8 +30,8 @@ import java.io.*;
 public class SaleActions {
 	
 	String loginUser = "root";
-    String loginPasswd = "";
-    String loginUrl = "jdbc:mysql://localhost/moviedb";
+    String loginPasswd = "FromJae1994";
+    String loginUrl = "jdbc:mysql://localhost:3306/moviedb";
 	
 	public void addSale(ItemsInCart cart, CheckOutInfo info) throws SQLException
 	{

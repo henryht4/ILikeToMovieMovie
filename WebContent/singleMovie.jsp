@@ -17,6 +17,7 @@
 <body>
 <div class="div1"><center><a href="./login.jsp"><img src ="http://i68.tinypic.com/33ju1p4.png"></a></center>
 		<h1>Movie Details</h1>
+		<center>
 		<table border="1px" width="600px">
 		<tr style="font-size: large; font-weight: bold">
 			<th>ID</th>
@@ -74,6 +75,7 @@
 			
 	%>
 	</table>
+	</center>
 	</div>
 </body>
 </center>

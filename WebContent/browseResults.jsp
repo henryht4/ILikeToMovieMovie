@@ -17,6 +17,7 @@
 <body>
 <div class="div1"><center><a href="./login.jsp"><img src ="http://i68.tinypic.com/33ju1p4.png"></a></center>
 		<h1>Browse Results</h1>
+		<center>
 		<table border="1px" width="600px">
 		<tr>
 			<th>ID</th>
@@ -37,7 +38,7 @@
 			<tr>
 				<td><%=movie.getId() %></td>
 				
-				<td><a href=<%= "\"SingleMovie.jsp?title=" + movie.getTitle() + "\"" %> ><%= movie.getTitle() %></a></td>
+				<td><a href=<%= "\"singleMovie.jsp?title=" + movie.getTitle() + "\"" %> ><%= movie.getTitle() %></a></td>
 				<td><%=movie.getYear() %></td>
 				<td><%=movie.getDirector() %></td>
 			 	<td><ul>
@@ -70,7 +71,7 @@
 			
 	%>
 	</table>
-	
+	</center>
 	</div>
 </body>
 </html>
