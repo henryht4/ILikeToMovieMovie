@@ -104,7 +104,7 @@ public class StarServlet extends HttpServlet {
         			out.println("<td><ul>");
         			for(int i=0; i< movieName.size();i++)
         			{
-        				out.println("<li><a href=\"singleMovie.jsp?title="+ movieName.get(i) +"\">" + movieName.get(i)+"</a></li>");
+        				out.println("<li><a href=\"movie.jsp?title="+ movieName.get(i) +"\">" + movieName.get(i)+"</a></li>");
         			}
         			out.println("</ul></td>");
         			out.println("<td>" + starName + "</td>");
