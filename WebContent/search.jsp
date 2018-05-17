@@ -88,6 +88,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>I Like To Movie Movie</title>
+
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
 </head>
 
 <%@include file="navbar.jsp"%>
@@ -122,8 +125,11 @@
       <!--star name-->
       <div id="fifth">Star name:</div>
       <div id="align"><input type="text" name="starName" value="" onkeypress="return onlyAlphabets(event,this); " /></div>
-  <br><br>
-      <button class="btn btn-lg btn-default" id="txtuser" type="submit" name ="search"> Search </button>   
+  <br>
+  <br>
+  
+  <button class="btn btn-lg btn-default" id="txtuser" type="submit" name ="search"> Search </button>   
+     
 </form> 
 
 <h2>${errorMessage}</h2>

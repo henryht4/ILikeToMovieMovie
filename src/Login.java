@@ -22,14 +22,17 @@ import com.mysql.jdbc.ResultSetMetaData;
 import helper.CartItem;
 import helper.Customer;
 import helper.ItemsInCart;
+import helper.RecaptchaVerification;
 
 import java.util.ArrayList;
 
 
 
-@WebServlet("/Login")
+@WebServlet( urlPatterns = "/Login")
 
 public class Login extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
 
 	public Login() {}; //public constructor
 	
@@ -41,7 +44,27 @@ public class Login extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	
+        PrintWriter out = response.getWriter();
+
+		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+	 // System.out.println("gRecaptchaResponse=" + gRecaptchaResponse);
+		
+		//VERIFIES Recaptcha
+		try {
+			RecaptchaVerification.verify(gRecaptchaResponse);
+		}catch(Exception e) {
+			out.println("<html>");
+            out.println("<head><title>Recaptcha Error</title></head>");
+            //out.println("<link rel=\"stylesheet\" href=\"style.css\">");
+            out.println("<body>");
+            out.println("<p>There was a Recaptcha verification error! Please go back and make sure you are not a computer!</p>");
+            out.println("<p>" + e.getMessage() + "</p>");
+            out.println("</body>");
+            out.println("</html>");
+            
+            out.close();
+			return;
+		}
 
 		String loginUser = "mytestuser";
         String loginPasswd = "mypassword";
@@ -57,6 +80,7 @@ public class Login extends HttpServlet {
 			
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
+			
 			
 			String query ="SELECT * from customers where email=?";
 			

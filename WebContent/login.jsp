@@ -6,9 +6,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Login to ILikeToMovieMovie</title>
+<script src='https://www.google.com/recaptcha/api.js'></script>
 
+</head>
 <link rel="stylesheet" href="style.css">
-   
+  
 <%@include file="navbar.jsp"%>
 
 <body>	
@@ -27,14 +30,14 @@
 			<tr><td>
 			<p></p>
             <button class="btn btn-lg btn-default btn-block login1" id="txtuser" type="submit"><span class="glyphicon glyphicon-log-in"></span> Login </button>   
-			
 		</table>
 		</center>
+			
 
 			<c:if test="${not empty errorMessage}">
 				<c:out value="${errorMessage}"/>
 			</c:if>
-			
+		<div class="g-recaptcha" data-sitekey="6LeIc1kUAAAAAFxLdQJxIjculbMJmC3swTKLbEbi"></div><br>
 	</form>
 	</div>
 	</center>
