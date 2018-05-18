@@ -60,8 +60,8 @@ public class Login extends HttpServlet {
             out.close();
 			return;
 		}
-		String loginUser = "root";
-        String loginPasswd = "FromJae1994";
+		String loginUser = "mytestuser";
+        String loginPasswd = "mypassword";
         String loginUrl = "jdbc:mysql://localhost:3306/moviedb";
         
         try {
