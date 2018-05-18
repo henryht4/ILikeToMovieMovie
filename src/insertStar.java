@@ -90,7 +90,7 @@ public class insertStar extends HttpServlet {
 			statement .executeUpdate();
 			
 			
-			response.sendRedirect("index.jsp?found=true");
+			response.sendRedirect("dashboard.jsp?found=true");
 			
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block

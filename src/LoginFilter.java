@@ -40,7 +40,8 @@ public class LoginFilter implements Filter {
         requestURI = requestURI.toLowerCase();
 
         return requestURI.endsWith("Login.java") || requestURI.endsWith("login.jsp") || requestURI.endsWith("index.jsp")
-                || requestURI.endsWith("/login") || requestURI.endsWith("style.css") || requestURI.endsWith("cart.png") ;
+                || requestURI.endsWith("/login") || requestURI.endsWith("style.css") || requestURI.endsWith("cart.png") 
+                || requestURI.endsWith("metadata.jsp");
     }
     
     public void init(FilterConfig fConfig) {

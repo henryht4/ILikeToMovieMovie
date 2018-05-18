@@ -14,6 +14,7 @@
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
     <url-pattern>/login</url-pattern>
+    <url-pattern>/dashboard</url-pattern>
   </servlet-mapping>
   
   <resource-ref>
@@ -88,6 +89,24 @@
     <servlet-name>checkout</servlet-name>
     <url-pattern>/checkout</url-pattern>
     </servlet-mapping>
+    
+    
+  <servlet>
+    <servlet-name>insertStar</servlet-name>
+    <servlet-class>insertStar</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>insertStar</servlet-name>
+    <url-pattern>/insertStar</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>insertMovie</servlet-name>
+    <servlet-class>insertMovie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>insertMovie</servlet-name>
+    <url-pattern>/insertMovie</url-pattern>
+  </servlet-mapping>
     
 <security-constraint>
  <web-resource-collection>

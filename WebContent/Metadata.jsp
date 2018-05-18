@@ -26,7 +26,7 @@
 
 <div class="div1"><center><a href="./login.jsp"><img src ="http://i68.tinypic.com/33ju1p4.png"></a></center>
 		<h2>Database Metadata</h2>
-		
+<center>
 
 <%
 
@@ -100,5 +100,6 @@ try {
 	e.printStackTrace();
 }
 %>
+</center>
 </body>
 </html>

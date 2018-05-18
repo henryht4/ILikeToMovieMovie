@@ -49,9 +49,9 @@ public class insertMovie extends HttpServlet {
 		CallableStatement csmt;
 		try {
 			csmt = con.prepareCall("{call add_movie(?,?,?,?,?)}");
-			csmt.setString("title", name);
-			csmt.setInt("year", Integer.parseInt(year));
-			csmt.setString("director",director);
+			csmt.setString("titles", name);
+			csmt.setInt("years", Integer.parseInt(year));
+			csmt.setString("directors",director);
 			csmt.setString("starName",star);
 			csmt.setString("genreName",genre);
 			csmt.registerOutParameter(11, 12);

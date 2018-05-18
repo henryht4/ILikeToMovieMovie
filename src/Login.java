@@ -60,8 +60,8 @@ public class Login extends HttpServlet {
             out.close();
 			return;
 		}
-		String loginUser = "mytestuser";
-        String loginPasswd = "mypassword";
+		String loginUser = "root";
+        String loginPasswd = "FromJae1994";
         String loginUrl = "jdbc:mysql://localhost:3306/moviedb";
         
         try {
@@ -120,7 +120,7 @@ public class Login extends HttpServlet {
 				query ="SELECT * from employees where email=?";
 
 				 pst=connection.prepareStatement(query);
-				pst.setString(1, email);
+				 pst.setString(1, email);
 				 result = pst.executeQuery();
 
 				 success = false;
@@ -135,7 +135,6 @@ public class Login extends HttpServlet {
 					
 					if(success)
 					{
-						
 						RequestDispatcher rd = request.getRequestDispatcher("/dashboard.jsp");
 						rd.forward(request, response);
 						
