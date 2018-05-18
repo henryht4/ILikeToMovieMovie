@@ -14,18 +14,18 @@
 
 
 <%
-		
-
+			
 			ArrayList<MovieListing> movies=(ArrayList<MovieListing>) request.getSession().getAttribute("Movies"); 			
 
 			for (int i = 0; i < movies.size()-1; i++)
 			{
-			   int min = i;
+			   int max = i;
 			   for (int j = i+1; j < movies.size(); j++)
-			         if (movies.get(j).getTitle().compareTo(movies.get(min).getTitle()) ==-1) min = j;
+			         if (movies.get(j).getRating()>movies.get(max).getRating()) 
+			        	 max = j;
 			   MovieListing temp = movies.get(i);
-			   movies.set(i,movies.get(min));
-			   movies.set(min,temp) ;
+			   movies.set(i,movies.get(max));
+			   movies.set(max,temp) ;
 			}
 			request.getSession().setAttribute("Movies", movies);
 			response.sendRedirect("searchResult.jsp");

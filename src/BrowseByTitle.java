@@ -47,7 +47,7 @@ public class BrowseByTitle extends HttpServlet {
 			String query="";
 			ResultSet result = null;
 		
-			query="Select * from movies where left(title,1)=?";
+			query="Select * from movies where left(title,1)=? limit 25";
 			statement = con.prepareStatement(query);
 			statement.setString(1, first);
 			result = statement.executeQuery();

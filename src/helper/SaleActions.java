@@ -29,8 +29,8 @@ import java.io.*;
 //this class establishes all the sales action if customers information matches 
 public class SaleActions {
 	
-	String loginUser = "root";
-    String loginPasswd = "FromJae1994";
+	String loginUser = "mytestuser";
+    String loginPasswd = "mypassword";
     String loginUrl = "jdbc:mysql://localhost:3306/moviedb";
 	
 	public void addSale(ItemsInCart cart, CheckOutInfo info) throws SQLException
