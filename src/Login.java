@@ -22,8 +22,11 @@ import com.mysql.jdbc.ResultSetMetaData;
 import helper.CartItem;
 import helper.Customer;
 import helper.ItemsInCart;
+import helper.RecaptchaVerification;
+
 
 import java.util.ArrayList;
+
 
 
 
@@ -35,14 +38,28 @@ public class Login extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("login.jsp").forward(request, response);
+		
+        PrintWriter out = response.getWriter();
 
-	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-	
-
+		String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+	 // System.out.println("gRecaptchaResponse=" + gRecaptchaResponse);
+		
+		//VERIFIES Recaptcha
+		try {
+			RecaptchaVerification.verify(gRecaptchaResponse);
+		}catch(Exception e) {
+			out.println("<html>");
+            out.println("<head><title>Recaptcha Error</title></head>");
+            //out.println("<link rel=\"stylesheet\" href=\"style.css\">");
+            out.println("<body>");
+            out.println("<p>There was a Recaptcha verification error! Please go back and make sure you are not a computer!</p>");
+            out.println("<p>" + e.getMessage() + "</p>");
+            out.println("</body>");
+            out.println("</html>");
+            
+            out.close();
+			return;
+		}
 		String loginUser = "root";
         String loginPasswd = "FromJae1994";
         String loginUrl = "jdbc:mysql://localhost:3306/moviedb";
@@ -52,20 +69,19 @@ public class Login extends HttpServlet {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			
 			Connection connection = DriverManager.getConnection(loginUrl,loginUser,loginPasswd);
-			
 			Statement statement = connection.createStatement();
 			
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			
 			String query ="SELECT * from customers where email=?";
-			
+
 			PreparedStatement pst=connection.prepareStatement(query);
 			pst.setString(1, email);
 			ResultSet result = pst.executeQuery();
 
 			boolean success = false;
-			
+
 			if(result.next()) {
 				Customer cust= new Customer();
 		        HttpSession session = request.getSession();//save user email in session scope
@@ -101,10 +117,45 @@ public class Login extends HttpServlet {
 			}
 			else {
 				
-				
+				query ="SELECT * from employees where email=?";
+
+				 pst=connection.prepareStatement(query);
+				pst.setString(1, email);
+				 result = pst.executeQuery();
+
+				 success = false;
+
+				if(result.next()) {
+					
+					  // get the encrypted password from the database
+					String encryptedPassword = result.getString("password");
+					
+					// use the same encryptor to compare the user input password with encrypted password stored in DB
+					success = new StrongPasswordEncryptor().checkPassword(password, encryptedPassword);
+					
+					if(success)
+					{
+						
+						RequestDispatcher rd = request.getRequestDispatcher("/dashboard.jsp");
+						rd.forward(request, response);
+						
+					}
+					else
+					{
+						
+						request.setAttribute("errorMessage", "Invalid username or password! Please try again");
+						RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+						rd.forward(request, response);
+					}
+					
+				}
+				else
+				{
+					
 				request.setAttribute("errorMessage", "Invalid username or password! Please try again");
 				RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
 				rd.forward(request, response);
+				}
 			}
 			
 			connection.close();
@@ -114,5 +165,13 @@ public class Login extends HttpServlet {
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request,response);
+	
+		
 	}
 }
