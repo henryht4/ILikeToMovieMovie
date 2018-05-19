@@ -27,8 +27,9 @@
 	
 		
 		if(request.getParameter("found")!=null){
-			out.write("<h2 >Star Inserted</h2>");
-		}
+			%>
+			<h4><%=request.getParameter("found") %></h4>
+	<% 	}
 	%>
     
    <button onclick="window.location.href='insertNewStar.jsp'">Insert New Star</button>

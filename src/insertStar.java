@@ -38,10 +38,11 @@ public class insertStar extends HttpServlet {
 		
 		String name= (String)request.getParameter("name");
 		String year=(String)request.getParameter("year");
-		
+		System.out.println(name);
 			
 		
 		Connection con=DBConnection.getConnection();
+		System.out.println(name);
 		
 		
 		PreparedStatement statement = null;
@@ -62,6 +63,8 @@ public class insertStar extends HttpServlet {
 				
 				lastId= result.getString(1);
 			}
+			System.out.println(lastId);
+			
 			
 			int last= Integer.parseInt(lastId.substring(2));
 			String starId=lastId.substring(0,2)+String.valueOf(last+1);
@@ -78,6 +81,8 @@ public class insertStar extends HttpServlet {
 			}
 			else
 			{
+				System.out.println("ok");
+				
 				query = "INSERT INTO stars"
 						+ "(id, name, birthyear) VALUES"
 						+ "(?,?,?)";
@@ -90,7 +95,9 @@ public class insertStar extends HttpServlet {
 			statement .executeUpdate();
 			
 			
-			response.sendRedirect("dashboard.jsp?found=true");
+			System.out.println("done");
+			
+			response.sendRedirect("dashboard.jsp?found=Star Inserted");
 			
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block

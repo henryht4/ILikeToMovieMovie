@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,17 +49,17 @@ public class insertMovie extends HttpServlet {
 		
 		CallableStatement csmt;
 		try {
-			csmt = con.prepareCall("{call add_movie(?,?,?,?,?)}");
+			csmt = con.prepareCall("{call add_movie(?,?,?,?,?,?)}");
 			csmt.setString("titles", name);
 			csmt.setInt("years", Integer.parseInt(year));
 			csmt.setString("directors",director);
 			csmt.setString("starName",star);
 			csmt.setString("genreName",genre);
-			csmt.registerOutParameter(11, 12);
+			csmt.registerOutParameter(6, Types.VARCHAR);
 			csmt.execute();
 			String out = "";
-			out = csmt.getString(11);
-			response.sendRedirect("search.jsp?found="+out);
+			out = csmt.getString(6);
+			response.sendRedirect("dashboard.jsp?found="+out);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
