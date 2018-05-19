@@ -63,7 +63,7 @@ public class BrowseByGenre extends HttpServlet {
 			MovieListing movie= new MovieListing();
 			ArrayList<String> movieId= new ArrayList<String>();
 			ArrayList<MovieListing> list=null;
-			query="Select movieId from genres_in_movies where genreId=? limit 25";
+			query="Select movieId from genres_in_movies where genreId=?";
 			statement=con.prepareStatement(query);
 			statement.setString(1, genreId);
 			result = statement.executeQuery();

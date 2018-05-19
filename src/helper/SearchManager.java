@@ -16,9 +16,9 @@ public class SearchManager {
 		ArrayList<MovieListing> list=new ArrayList<>();
 		try{
 			Connection con=DBConnection.getConnection();
-			String query="SELECT  m.title,m.`year`,m.director,s.name,r.rating ,sim.`movieID`, s.`id` FROM movies m JOIN stars_in_movies sim "  
-						+"ON m.`id`=sim.`movieID` JOIN stars s ON s.`id`=sim.`starID` JOIN ratings r ON r.`movieID`=m.`id` " 
-						+"WHERE m.title LIKE ? AND m.`year` LIKE ?  AND m.director LIKE ? AND s.name LIKE ?";
+			String query="SELECT  m.title,m.year,m.director,s.name,r.rating ,sim.movieID, s.id FROM movies m JOIN stars_in_movies sim "  
+						+"ON m.id=sim.movieID JOIN stars s ON s.id=sim.starID JOIN ratings r ON r.movieID=m.id " 
+						+"WHERE m.title LIKE ? AND m.year LIKE ?  AND m.director LIKE ? AND s.name LIKE ?";
 			
 			
 			
@@ -84,7 +84,7 @@ public class SearchManager {
 					
 					ArrayList <String> genres= new ArrayList<String>();
 					ArrayList <String> genresId= new ArrayList<String>();
-					String query1="Select genreId from genres_in_movies where movieId = ?";
+					String query1="Select genreId from genres_in_movies gim, genres g where gim.genreId = g.id and gim.movieId = ?";
 					PreparedStatement pmst=con.prepareStatement(query1);
 					pmst.setString(1, item.getId());
 					ResultSet rs=pmst.executeQuery();

@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import helper.SearchManager;
 import helper.MovieListing;
+import helper.RecaptchaVerification;
 
 /**
  * Servlet implementation class SearchServlet
@@ -50,6 +51,27 @@ public class SearchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		 PrintWriter out = response.getWriter();
+
+			String gRecaptchaResponse = request.getParameter("g-recaptcha-response");
+		 // System.out.println("gRecaptchaResponse=" + gRecaptchaResponse);
+			
+			//VERIFIES Recaptcha
+			try {
+				RecaptchaVerification.verify(gRecaptchaResponse);
+			}catch(Exception e) {
+				out.println("<html>");
+	            out.println("<head><title>Recaptcha Error</title></head>");
+	            //out.println("<link rel=\"stylesheet\" href=\"style.css\">");
+	            out.println("<body>");
+	            out.println("<p>There was a Recaptcha verification error! Please go back and make sure you are not a computer!</p>");
+	            out.println("<p>" + e.getMessage() + "</p>");
+	            out.println("</body>");
+	            out.println("</html>");
+	            
+	            out.close();
+				return;
+			}
 		if(request.getParameter("search")!=null){
 			
 			if(request.getParameter("title")=="" && request.getParameter("year")=="" &&
