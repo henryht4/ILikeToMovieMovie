@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="helper.MovieListing"%>
+<%@ page import="helper.SearchManager"%>
 <%@ page import="java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -17,7 +18,6 @@
 <body>
 <div class="div1"><center><a href="./login.jsp"><img src ="http://i68.tinypic.com/33ju1p4.png"></a></center>
 		<h1>Movie Details</h1>
-		<center>
 		<table border="1px" width="600px">
 		<tr style="font-size: large; font-weight: bold">
 			<th>ID</th>
@@ -30,13 +30,14 @@
 		</tr>
 		
 	<%
-			ArrayList<MovieListing> movies=(ArrayList<MovieListing>) request.getSession().getAttribute("Movies");
-	for(MovieListing movie:movies){
-		System.out.println(movie.getTitle());
-	}
-			String title= (String)request.getParameter("title");
+	
+	String title= (String)request.getParameter("title");
+			ArrayList<MovieListing> movies=SearchManager.getMovieByTitle(title);
+	        
 			
+			System.out.println(title);
 			for(MovieListing movie:movies){
+				
 				if(movie.getTitle().equalsIgnoreCase(title))
 				{
 	%>
@@ -75,7 +76,6 @@
 			
 	%>
 	</table>
-	</center>
 	</div>
 </body>
 </center>

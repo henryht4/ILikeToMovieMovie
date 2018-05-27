@@ -3,9 +3,9 @@ package helper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import helper.DBConnection;
@@ -31,6 +31,7 @@ public class SearchManager {
 			}
 			pst.setString(3, "%"+movie.getDirector()+"%");
 			pst.setString(4, "%"+sn+"%");
+			
 			
 			ResultSet rst=pst.executeQuery();
 			while(rst.next()){
@@ -115,4 +116,141 @@ public class SearchManager {
 		return list;
 		
 	}
+	public static ArrayList<MovieListing> getAdvanceSearchResults(String sn){
+		ArrayList<MovieListing> list=new ArrayList<>();
+		try{
+			Connection con=DBConnection.getConnection();
+			String query="SELECT  id, title from movies WHERE title LIKE '"+sn+"%'";
+			
+			
+			
+			PreparedStatement pst=con.prepareStatement(query);
+			
+			
+			
+			
+			ResultSet rst=pst.executeQuery();
+			while(rst.next()){
+				MovieListing movie=new MovieListing();
+				
+				movie.setId((rst.getString(1)));
+				movie.setTitle(rst.getString(2));
+				
+				
+				
+				list.add(movie);
+			}
+	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public static ArrayList<MovieListing> getMovieByTitle(String title) {
+		Connection con=DBConnection.getConnection();
+		ArrayList<MovieListing> movies= new ArrayList<MovieListing>();
+		ArrayList<MovieListing> list=null;
+
+				PreparedStatement statement = null;
+				try {
+					
+					String query="";
+					ResultSet result = null;
+				
+					query="Select * from movies where title = ?";
+					
+					statement = con.prepareStatement(query);
+					statement.setString(1, title);
+					result = statement.executeQuery();
+					
+					
+					MovieListing movie= new MovieListing();
+					ArrayList<String> movieId= new ArrayList<String>();
+					
+					
+						while(result.next()){
+							MovieListing movie2=new MovieListing();
+							
+							movie2.setTitle(result.getString(2));
+							movie2.setYear(result.getInt(3));
+							movie2.setDirector(result.getString(4));
+							movie2.setId(result.getString(1));
+							movies.add(movie2);
+						}
+						
+						
+					for(MovieListing item:movies)
+					{
+						query="Select rating from ratings where movieId=?";
+						statement = con.prepareStatement(query);
+						statement.setString(1, item.getId());
+						result = statement.executeQuery();
+						while(result.next()){
+							item.setRating(result.getFloat(1));
+						}
+						
+						query="Select starId from stars_in_movies where movieId=?";
+						statement = con.prepareStatement(query);
+						statement.setString(1, item.getId());
+						result = statement.executeQuery();
+						ArrayList<String> sid= new ArrayList<String>();
+						while(result.next()){
+							sid.add(result.getString(1));
+						}
+						item.setStarID(sid);
+						
+						ArrayList<String> sname= new ArrayList<String>();
+						for(String id: sid)
+						{
+							query="Select name from stars where id=?";
+							statement = con.prepareStatement(query);
+							statement.setString(1, id);
+							result = statement.executeQuery();
+							
+							while(result.next()){
+								sname.add(result.getString(1));
+							}
+						}
+						item.setStarName(sname);
+						
+						query="Select genreId from genres_in_movies where movieId=?";
+						statement = con.prepareStatement(query);
+						statement.setString(1, item.getId());
+						result = statement.executeQuery();
+						ArrayList<String> gid= new ArrayList<String>();
+						while(result.next()){
+							gid.add(result.getString(1));
+						}
+						item.setGenreID(gid);
+						
+						ArrayList<String> gname= new ArrayList<String>();
+						for(String id: gid)
+						{
+							query="Select name from genres where id=?";
+							statement = con.prepareStatement(query);
+							statement.setString(1, id);
+							result = statement.executeQuery();
+							
+							while(result.next()){
+								gname.add(result.getString(1));
+							}
+						}
+						item.setGenres(gname);
+						
+					}
+						
+			
+					
+					
+					
+					
+				}catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return movies;
+			}
+	
 }
