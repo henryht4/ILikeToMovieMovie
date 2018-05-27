@@ -95,7 +95,7 @@ public class SearchResults extends HttpServlet {
             String limit = request.getParameter("limit");
             
             // Generate a SQL query
-            String query = String.format("SELECT * FROM movies WHERE title like '%s' LIMIT %s", title, limit);
+            String query = String.format("SELECT * FROM movies WHERE title like '%s'", title);
            
             // Perform the query
             ResultSet rs = statement.executeQuery(query);
@@ -200,7 +200,7 @@ public class SearchResults extends HttpServlet {
             out.println(String.format("<body><h1>Movies made in the Year %s</h1>", year));
             
             // Generate a SQL query
-            String query = String.format("SELECT * FROM movies WHERE year = '%s' LIMIT %s", year, limit);
+            String query = String.format("SELECT * FROM movies WHERE year = '%s' ", year);
            
             // Perform the query
             ResultSet rs = statement.executeQuery(query);
@@ -295,7 +295,7 @@ public class SearchResults extends HttpServlet {
             String limit = request.getParameter("limit");
            
             // Generate a SQL query
-            String query = String.format("SELECT * FROM movies WHERE director like '%s' LIMIT %s", director, limit);
+            String query = String.format("SELECT * FROM movies WHERE director like '%s'", director);
            
             // Perform the query
             ResultSet rs = statement.executeQuery(query);
@@ -397,7 +397,7 @@ public class SearchResults extends HttpServlet {
             // Generate a SQL query
             String query = String.format(" SELECT s.name, m.id, m.title, m.year,m.director "
             		+ "FROM movies m, stars s, stars_in_movies sl "
-            		+ "WHERE m.id = sl.movieId and sl.starId = s.id and s.name like '%s' LIMIT %s", star, limit);
+            		+ "WHERE m.id = sl.movieId and sl.starId = s.id and s.name like '%s'", star);
            
             // Perform the query
             ResultSet rs = statement.executeQuery(query);
