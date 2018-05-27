@@ -31,11 +31,6 @@ public class AdvanceSearch extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
 	
-	
-	   
-   
-
-     
      
     public AdvanceSearch() {
         super();

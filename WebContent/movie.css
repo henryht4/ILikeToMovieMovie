@@ -1,0 +1,54 @@
+#second{
+    margin-top: 40px;
+}
+
+#second{
+     color: white;
+    box-shadow:5px 14px 50px 20px orange;
+    background-color: black;
+   height: 20px;
+    width:40px;
+   
+}
+#third{
+     color: white;
+    box-shadow:5px 14px 50px 20px orange;
+    background-color: black;
+   width:40px;
+   height: 20px;
+   
+}
+#fourth{
+     color: white;
+    box-shadow:5px 14px 50px 20px orange;
+    background-color: black;
+   height: 20px;
+    width:65px;
+   
+}
+#fifth{
+     color: white;
+    box-shadow:5px 14px 50px 20px orange;
+    background-color: black;
+  height: 20px;
+    width:80px;
+  
+}
+#align{
+    margin-left: 60px;
+    margin-top: 20px;
+}
+.button {
+    background-color: orange; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    margin-left: 100px;
+    height: 35px;
+    width: 80px;
+

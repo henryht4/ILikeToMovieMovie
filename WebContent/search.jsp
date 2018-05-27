@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
-<script src='https://www.google.com/recaptcha/api.js'></script>
+
 <head>
 <script>
 <!--function for only numerics-->
@@ -88,9 +88,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>I Like To Movie Movie</title>
-
-<script src='https://www.google.com/recaptcha/api.js'></script>
-
 </head>
 
 <%@include file="navbar.jsp"%>
@@ -111,26 +108,22 @@
     
   <form action="SearchServlet" method="post">
       <!--title-->
-     <div id="second"> Title:</div>
+     <div id="second"> <h4>Title:</h4><br></div>
       <div id="align"><input type="text" name="title" value="" onkeypress="return onlyAlphabets(event,this);" /></div>
   <br>
       <!--year-->
-      <div id="third">Year:</div>
+      <div id="third"><h4>Year:</h4><br></div>
       <div id="align"><input type="text" name="year" value="" onkeypress="return onlyNos(event,this)" /></div>
   <br>
       <!--director-->
-      <div id="fourth">Director:</div>
+      <div id="fourth"><h4>Director:</h4><br></div>
       <div id="align"><input type="text" name="director" value="" onkeypress="return onlyAlphabets(event,this);" /></div>
   <br>
       <!--star name-->
-      <div id="fifth">Star name:</div>
+      <div id="fifth"><h4>Star name:</h4><br></div>
       <div id="align"><input type="text" name="starName" value="" onkeypress="return onlyAlphabets(event,this); " /></div>
-  <br>
-  <br>
-  
-  <button class="btn btn-lg btn-default" id="txtuser" type="submit" name ="search"> Search </button>   
-  <center><div class="g-recaptcha" data-sitekey="6LeIc1kUAAAAAFxLdQJxIjculbMJmC3swTKLbEbi"></div><br></center>
-     
+  <br><br>
+      <button class="btn btn-lg btn-default btn-block login1" id="txtuser" type="submit" name ="search"><span class="glyphicon glyphicon-log-in"></span> Search </button>   
 </form> 
 
 <h2>${errorMessage}</h2>

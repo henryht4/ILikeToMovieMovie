@@ -28,7 +28,7 @@
 						<tr>
 						<td>
 							<div>
-								<a href="singleMovie.jsp?title=${item.getMovie().getTitle()}">${item.getMovie().getTitle()}</a>
+								<a href="SingleMovie.jsp?title=${item.getMovie().getTitle()}">${item.getMovie().getTitle()}</a>
 							</div>
 						</td>
 							<td>Product: </td>

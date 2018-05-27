@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="style.css">
 
 <body>
-
+	
 	<div class="div1"><center><a href="./login.jsp"><img src ="http://i68.tinypic.com/33ju1p4.png"></a></center>
 	
 	    <p>Welcome to our movie database!</p><br>
@@ -27,9 +27,8 @@
 	
 		
 		if(request.getParameter("found")!=null){
-			%>
-			<h4><%=request.getParameter("found") %></h4>
-	<% 	}
+			out.write("<h2 >Star Inserted</h2>");
+		}
 	%>
     
    <button onclick="window.location.href='insertNewStar.jsp'">Insert New Star</button>

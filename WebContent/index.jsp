@@ -46,7 +46,7 @@ request.getSession().setAttribute("movies", movies); %>
     <script type="text/javascript">
     $(document).ready(function() {
     $("#txtSearch").autocomplete({
-        max : 10,
+        
         minLength: 3,
         autoFocus: true,
         
@@ -62,10 +62,10 @@ request.getSession().setAttribute("movies", movies); %>
                    
                     var items = JSON.parse(data);
                     console.log(items);
-                    response( $.map( items, function( item ) {
+                    response( $.map( items.slice(0,10), function( item ) {
                         return {
                             label: item.title,
-                            value: item.id,
+                            value: item.title,
                         }
                         }));
                 },
@@ -80,11 +80,6 @@ request.getSession().setAttribute("movies", movies); %>
         	$('#txtSearch').val(ui.item.label);
         	window.location.href = encodeURI("singleMovie.jsp?title="+ui.item.label);
         	
-        },
-        focus: function (event, ui) {
-            event.preventDefault();
-            this.value = ui.item.label;
-            
         }
  
     });

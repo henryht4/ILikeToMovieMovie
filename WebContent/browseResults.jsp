@@ -16,19 +16,16 @@
 <%@include file="navbar.jsp"%>
 <body>
 <div class="div1"><center><a href="./login.jsp"><img src ="http://i68.tinypic.com/33ju1p4.png"></a></center>
-		<h1>Browse Results</h1>
-		<center>
+		<h1>Browse By Genre Results</h1>
 		<table border="1px" width="600px">
 		<tr>
 			<th>ID</th>
-			<th>Title<br><a href="sortByTitleDESC.jsp"> v </a><a href="sortByTitleASC.jsp"> ^ </a></th>
+			<th><a href="sortByTitle.jsp">Title</a></th>
 			<th>Year</th>
 			<th>Director</th>
-			<th>Star(s)</th>
+			<th>Star Name</th>
 			<th>Genres</th>
-			<th>Ratings<br><a href="sortByRatingDESC.jsp">v</a><a href="sortByRatingASC.jsp"> ^</a> </th>
-			<th>Limit<br><a>25</a><a> 50</a><a> 100</a></th>
-			<th><a>prev</a>/<a>next</a></th>
+			<th><a href="sortByRating.jsp">Ratings</a></th>
 		</tr>
 		
 	<%
@@ -40,7 +37,7 @@
 			<tr>
 				<td><%=movie.getId() %></td>
 				
-				<td><a href=<%= "\"singleMovie.jsp?title=" + movie.getTitle() + "\"" %> ><%= movie.getTitle() %></a></td>
+				<td><a href=<%= "\"SingleMovie.jsp?title=" + movie.getTitle() + "\"" %> ><%= movie.getTitle() %></a></td>
 				<td><%=movie.getYear() %></td>
 				<td><%=movie.getDirector() %></td>
 			 	<td><ul>
@@ -73,7 +70,7 @@
 			
 	%>
 	</table>
-	</center>
+	
 	</div>
 </body>
 </html>
