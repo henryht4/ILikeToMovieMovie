@@ -10,6 +10,44 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>I Like To Movie Movie</title>
+
+<script>
+function onlyAlphabets(e, t) {
+
+    try {
+
+        if (window.event) {
+
+            var charCode = window.event.keyCode;
+
+        }
+
+        else if (e) {
+
+            var charCode = e.which;
+
+        }
+
+        else { return true; }
+
+        if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || charCode==32 )
+
+            return true;
+
+        else
+
+            return false;
+
+    }
+
+    catch (err) {
+
+        alert(err.Description);
+
+    }
+
+}
+</script>
 </head>
 
 <%@include file="navbar.jsp"%>
@@ -26,13 +64,18 @@ request.getSession().setAttribute("movies", movies); %>
 	
 	    <p>Welcome to our movie database!</p><br>
     
-    
+    <center>
     <h2>Please Select an Option To Begin</h2>
+    <form action="NormalSearch" method="post">
     <div class="row">
-    <div class="col-md-4 col-md-push-4">
-    <input type="text" id="txtSearch" class="form-control" placeholder="Search">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search" id="txtSearch" name="title" value="" onkeypress="return onlyAlphabets(event,this);"/>
+          <button class="btn btn-lg btn-default btn-block login1" name ="search" type="submit">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
     </div>
-    </div>
+  </div>
+  </form></center>
     
     <button onclick="window.location.href='browse.jsp'">Browse Movies</button>
     
@@ -45,6 +88,7 @@ request.getSession().setAttribute("movies", movies); %>
     
     <script type="text/javascript">
     $(document).ready(function() {
+    	var cache = {};
     $("#txtSearch").autocomplete({
         
         minLength: 3,
@@ -52,6 +96,20 @@ request.getSession().setAttribute("movies", movies); %>
         
         highlight: true,
         source: function(request, response) {
+        	
+        	var term = request.term;
+        	if ( term in cache ) {
+                response(cache[term]);
+                console.log(cache[term]);
+                response( $.map( cache[term], function( item ) {
+                	
+                    return {
+                        label: item.title,
+                        value: item.title,
+                    }
+                    }));
+              }
+        	
             $.ajax({
                 url: "AdvanceSearch",
                 
@@ -63,6 +121,7 @@ request.getSession().setAttribute("movies", movies); %>
                     var items = JSON.parse(data);
                     console.log(items);
                     response( $.map( items.slice(0,10), function( item ) {
+                    	cache[term] = items.slice(0,10);
                         return {
                             label: item.title,
                             value: item.title,
