@@ -26,7 +26,7 @@ import helper.LoginResponse;
 /**
  * Servlet implementation class LoginServletAndroid
  */
-@WebServlet("/LoginServletAndroid")
+@WebServlet(name = "/LoginServletAndroid", urlPatterns = "/api/android-login")
 public class LoginServletAndroid extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -43,8 +43,8 @@ public class LoginServletAndroid extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String loginUser = "root";
-        String loginPasswd = "FromJae1994";
+		String loginUser = "mytestuser";
+        String loginPasswd = "mypassword";
         String loginUrl = "jdbc:mysql://localhost:3306/moviedb";
         LoginResponse auth = new  LoginResponse();
         try {
