@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MovieSearchActivity"></activity>
+        <activity android:name=".MovieSearchActivity" />
+        <activity android:name=".MovieActivity"></activity>
     </application>
 
 </manifest>

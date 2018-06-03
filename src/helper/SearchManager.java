@@ -116,8 +116,8 @@ public class SearchManager {
 		return list;
 		
 	}
-	public static ArrayList<MovieListing> getAdvanceSearchResults(String sn){
-		ArrayList<MovieListing> list=new ArrayList<>();
+	public static ArrayList<MovieResult> getAdvanceSearchResults(String sn){
+		ArrayList<MovieResult> list=new ArrayList<>();
 		try{
 			Connection con=DBConnection.getConnection();
 			String query="SELECT  id, title from movies WHERE title LIKE '"+sn+"%'";
@@ -131,7 +131,7 @@ public class SearchManager {
 			
 			ResultSet rst=pst.executeQuery();
 			while(rst.next()){
-				MovieListing movie=new MovieListing();
+				MovieResult movie=new MovieResult();
 				
 				movie.setId((rst.getString(1)));
 				movie.setTitle(rst.getString(2));
@@ -148,7 +148,7 @@ public class SearchManager {
 		return list;
 	}
 	
-	public static ArrayList<MovieListing> getMovieByTitle(String title) {
+		public static ArrayList<MovieListing> getMovieByTitle(String title) {
 		Connection con=DBConnection.getConnection();
 		ArrayList<MovieListing> movies= new ArrayList<MovieListing>();
 		ArrayList<MovieListing> list=null;

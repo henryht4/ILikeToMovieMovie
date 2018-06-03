@@ -28,7 +28,7 @@ public class MovieListAdapter extends ArrayAdapter<Movie>{
 
     private TextView titleTextView;
     private LinearLayout movieItemLinearLayout;
-    private ImageView bannerImageView;
+
     /**
      * Creates a new <code>TaskListAdapter</code> given a mContext, resource id and list of movies.
      *
@@ -60,47 +60,15 @@ public class MovieListAdapter extends ArrayAdapter<Movie>{
 
         titleTextView = (TextView) view.findViewById(R.id.titleTextView);
         movieItemLinearLayout = (LinearLayout) view.findViewById(R.id.movieItemLayout);
-        bannerImageView = (ImageView) view.findViewById(R.id.bannerImageView);
+
 
         titleTextView.setText(selectedMovie.getTitle());
 
-        URL url = selectedMovie.getBannerUrl();
-
-        new DownloadImageTask(bannerImageView)
-                .execute(url.toString());
-        /*try {
-            Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            bannerImageView.setImageBitmap(bmp);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
 
         movieItemLinearLayout.setTag(selectedMovie);
 
         return view;
     }
 
-    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
-        ImageView bmImage;
 
-        public DownloadImageTask(ImageView bmImage) {
-            this.bmImage = bmImage;
-        }
-
-        protected Bitmap doInBackground(String... urls) {
-            String urldisplay = urls[0];
-            Bitmap mIcon11 = null;
-            try {
-                InputStream in = new java.net.URL(urldisplay).openStream();
-                mIcon11 = BitmapFactory.decodeStream(in);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return mIcon11;
-        }
-
-        protected void onPostExecute(Bitmap result) {
-            bmImage.setImageBitmap(result);
-        }
-    }
 }

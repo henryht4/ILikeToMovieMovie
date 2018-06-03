@@ -6,27 +6,19 @@ import java.net.URL;
 
 
 public class Movie {
-    private int id;
-    private URL bannerUrl;
-    private int year;
-    private URL trailerUrl;
-    private String director;
+    private String id;
     private String title;
 
-    public Movie(int id, URL bannerUrl, int year, URL trailerUrl, String director, String title) {
+    public Movie(String id, String title) {
         this.id = id;
-        this.bannerUrl = bannerUrl;
-        this.year = year;
-        this.trailerUrl = trailerUrl;
-        this.director = director;
         this.title = title;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -40,45 +32,6 @@ public class Movie {
         return title;
     }
 
-    public String getDirector() {
-        return director;
-    }
 
-    public void setDirector(String director) {
-        this.director = director;
-    }
-
-    public URL getBannerUrl() {
-        return bannerUrl;
-    }
-
-    public void setBannerUrl(String bannerUrl) {
-
-        try {
-            this.bannerUrl = new URL(bannerUrl);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public URL getTrailerUrl() {
-        return trailerUrl;
-    }
-
-    public void setTrailerUrl(String trailerUrl) {
-        try {
-            this.trailerUrl = new URL(trailerUrl);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-    }
 }
 

@@ -1,10 +1,10 @@
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -43,95 +43,72 @@ public class LoginServletAndroid extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		String email= request.getParameter("email");
-		String pass=request.getParameter("pass");
-		
-		System.out.println(email);
-		System.out.println(pass);
-			
-		
-		//sql login
 		String loginUser = "root";
-        String loginPasswd = "root";
-        String loginUrl = "jdbc:mysql://localhost/moviedb";
-        
-       
-        
-        
-        //get writer
-       
-        
-        
+        String loginPasswd = "FromJae1994";
+        String loginUrl = "jdbc:mysql://localhost:3306/moviedb";
         LoginResponse auth = new  LoginResponse();
-       
-        Connection conn=null;
-		 PreparedStatement stmt = null;
-		 int rows=0;
-		 boolean flag=true;
-		 response.setContentType("application/json");
-		    response.setCharacterEncoding("UTF-8");
-        
         try {
-        	Class.forName("com.mysql.jdbc.Driver").newInstance();
-        	
-        	//create database connection
-        	conn = DriverManager.getConnection(loginUrl,loginUser,loginPasswd);
-        	
-        	String query="Select *from customers";
-			stmt = conn.prepareStatement(query);
-			ResultSet rs1  = stmt.executeQuery();
-			
-			
-			while(rs1.next() && flag){
-				if(rs1.getString(6).equalsIgnoreCase(email) ){
-					Customer cust= new Customer();
-					cust.setId(rs1.getInt(1));
-			        cust.setFname(rs1.getString(2));
-			        cust.setLname(rs1.getString(3));
-			        cust.setCcid(rs1.getString(4));
-			        cust.setAddress(rs1.getString(5));
-			        cust.setEmail(rs1.getString(6));
-			        cust.setPassword(rs1.getString(7));
-			        // get the encrypted password from the database
-					String encryptedPassword = rs1.getString("password");
-					
-					// use the same encryptor to compare the user input password with encrypted password stored in DB
-					boolean success = new StrongPasswordEncryptor().checkPassword(pass, encryptedPassword);
-					
-					
-					if(success)
-						flag=false;
-					
-					
-				}
-			}
-			
-			
-			
-			stmt.close();
-			conn.close();
-    		
-    		
-			if(flag)
-			{
 
-				auth.setAuth(false);
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			
+			Connection connection = DriverManager.getConnection(loginUrl,loginUser,loginPasswd);
+			Statement statement = connection.createStatement();
+			
+			String email = request.getParameter("email");
+			String password = request.getParameter("pass");
+			System.out.println(email);
+			System.out.println(password);
+			String query ="SELECT * from customers where email=?";
+
+			PreparedStatement pst=connection.prepareStatement(query);
+			pst.setString(1, email);
+			ResultSet result = pst.executeQuery();
+			response.setContentType("application/json");
+		    response.setCharacterEncoding("UTF-8");
+			
+			boolean success = false;
+
+			if(result.next()) {
+				Customer cust= new Customer();
+		        HttpSession session = request.getSession();//save user email in session scope
+		        ArrayList<CartItem> items = new ArrayList<CartItem>();
+		        
+		        cust.setId(result.getInt(1));
+		        cust.setFname(result.getString(2));
+		        cust.setLname(result.getString(3));
+		        cust.setCcid(result.getString(4));
+		        cust.setAddress(result.getString(5));
+		        cust.setEmail(result.getString(6));
+		        cust.setPassword(result.getString(7));
+		        
+		        session.setAttribute("items", items);
+		        session.setAttribute("email", email);
+		        session.setAttribute("cust", cust);
+		        
+		        // get the encrypted password from the database
+				String encryptedPassword = result.getString("password");
+				System.out.println(encryptedPassword);
+				// use the same encryptor to compare the user input password with encrypted password stored in DB
+				success = new StrongPasswordEncryptor().checkPassword(password, encryptedPassword);
+				System.out.println(success);
+				
+				if(success) {
+					auth.setAuth(true);
 				String json = new Gson().toJson(auth);
 			    
 			    response.getWriter().write(json);
+			    }
+				else
+				{
+					auth.setAuth(false);
+					String json = new Gson().toJson(auth);
+				   
+				    response.getWriter().write(json);
+				}
 			}
-			else
-			{
-				 
-				auth.setAuth(true);
-				String json = new Gson().toJson(auth);
-			   
-			    response.getWriter().write(json);
-			}
-			
-        } catch (Exception e) {
-        	String json = new Gson().toJson(auth);
+        }
+         catch (Exception e) {
+        	String json = new Gson().toJson(e.getMessage());
 		    
 		    response.getWriter().write(json);
     }

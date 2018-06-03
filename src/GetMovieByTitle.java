@@ -11,33 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 import helper.SearchManager;
 import helper.MovieListing;
-import helper.MovieResult;
-
-
 
 /**
- * Servlet implementation class AdvanceSearch
+ * Servlet implementation class GetMovieByTitle
  */
-@WebServlet("/AdvanceSearch")
-public class AdvanceSearch extends HttpServlet {
+@WebServlet("/GetMovieByTitle")
+public class GetMovieByTitle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-	
-	
-	   
-    
-
-     
-     
-    public AdvanceSearch() {
+    public GetMovieByTitle() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -51,13 +39,12 @@ public class AdvanceSearch extends HttpServlet {
         response.setHeader("Cache-control", "no-cache, no-store");
         response.setHeader("Pragma", "no-cache");
         response.setHeader("Expires", "-1");
-        Gson gson = new Gson();
-        JsonArray arrayObj=new JsonArray();
+        
        
         String query = request.getParameter("term");
         System.out.println(query);
         query = query.toLowerCase();
-        ArrayList<MovieResult> list=SearchManager.getAdvanceSearchResults(query);
+        ArrayList<MovieListing> list=SearchManager.getMovieByTitle(query);
         String json = new Gson().toJson(list);
         
         out.println(json);
@@ -68,21 +55,8 @@ public class AdvanceSearch extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-        response.setContentType("text/html");
-        response.setHeader("Cache-control", "no-cache, no-store");
-        response.setHeader("Pragma", "no-cache");
-        response.setHeader("Expires", "-1");
-        Gson gson = new Gson();
-        JsonArray arrayObj=new JsonArray();
-       
-        String query = request.getParameter("term");
-        System.out.println(query);
-        query = query.toLowerCase();
-        
-       
-        out.println(arrayObj.toString());
-        out.close();
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

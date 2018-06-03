@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
             JSONObject json = null;
 
             try {
-                URL url = new URL("http://10.0.2.2:8080/cart/LoginServletAndroid?email="
+                URL url = new URL("https://10.0.2.2:8443/cs122b/api/LoginServletAndroid?email="
                         +mEmail+"&pass="+mPassword);
                 // Simulate network access.
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
