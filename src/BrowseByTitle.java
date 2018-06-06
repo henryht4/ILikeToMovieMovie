@@ -7,11 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 import helper.DBConnection;
 import helper.MovieListing;
@@ -38,11 +42,24 @@ public class BrowseByTitle extends HttpServlet {
 	
 		String first= (String)request.getParameter("letter");
 		
-		Connection con=DBConnection.getConnection();
+		//Connection con=DBConnection.getConnection();
 		
 		
 		PreparedStatement statement = null;
 		try {
+			
+			//P5 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			
+			Context initCtx = new InitialContext();
+
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            
+            // Look up our data source
+            DataSource ds = (DataSource) envCtx.lookup("jdbc/TestDB");
+			
+            Connection con=ds.getConnection();
+          //P5 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			
 			
 			String query="";
 			ResultSet result = null;
@@ -135,6 +152,9 @@ public class BrowseByTitle extends HttpServlet {
 			response.sendRedirect("browseResults.jsp");
 			
 		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

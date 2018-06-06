@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 
 import org.jasypt.util.password.StrongPasswordEncryptor;
 
@@ -49,10 +52,25 @@ public class LoginServletAndroid extends HttpServlet {
         LoginResponse auth = new  LoginResponse();
         try {
 
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			//Class.forName("com.mysql.jdbc.Driver").newInstance();
 			
-			Connection connection = DriverManager.getConnection(loginUrl,loginUser,loginPasswd);
-			Statement statement = connection.createStatement();
+			//Connection connection = DriverManager.getConnection(loginUrl,loginUser,loginPasswd);
+			
+        	//P5 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			
+			Context initCtx = new InitialContext();
+
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            
+            // Look up our data source
+            DataSource ds = (DataSource) envCtx.lookup("jdbc/TestDB");
+			
+            Connection con=ds.getConnection();
+			
+            //P5~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		
+        	
+        	//Statement statement = con.createStatement();
 			
 			String email = request.getParameter("email");
 			String password = request.getParameter("pass");
@@ -60,7 +78,7 @@ public class LoginServletAndroid extends HttpServlet {
 			System.out.println(password);
 			String query ="SELECT * from customers where email=?";
 
-			PreparedStatement pst=connection.prepareStatement(query);
+			PreparedStatement pst=con.prepareStatement(query);
 			pst.setString(1, email);
 			ResultSet result = pst.executeQuery();
 			response.setContentType("application/json");

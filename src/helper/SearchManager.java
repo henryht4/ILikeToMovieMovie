@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
 import helper.DBConnection;
 import helper.MovieListing;
 
@@ -15,7 +19,21 @@ public class SearchManager {
 	public static ArrayList<MovieListing> getSearchResults(MovieListing movie, String sn){
 		ArrayList<MovieListing> list=new ArrayList<>();
 		try{
-			Connection con=DBConnection.getConnection();
+			//Connection con=DBConnection.getConnection();
+			
+			//P5 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			
+			Context initCtx = new InitialContext();
+
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            
+            // Look up our data source
+            DataSource ds = (DataSource) envCtx.lookup("jdbc/TestDB");
+			
+            Connection con=ds.getConnection();
+			
+            //P5~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		
 			String query="SELECT  m.title,m.year,m.director,s.name,r.rating ,sim.movieID, s.id FROM movies m JOIN stars_in_movies sim "  
 						+"ON m.id=sim.movieID JOIN stars s ON s.id=sim.starID JOIN ratings r ON r.movieID=m.id " 
 						+"WHERE m.title LIKE ? AND m.year LIKE ?  AND m.director LIKE ? AND s.name LIKE ?";
