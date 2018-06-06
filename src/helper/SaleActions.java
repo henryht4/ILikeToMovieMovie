@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.ResultSetMetaData;
@@ -37,15 +40,29 @@ public class SaleActions {
 	{
 		
 		try {
+			
 			java.util.Date date = new java.util.Date();
 
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			Connection connection = DriverManager.getConnection(loginUrl,loginUser,loginPasswd);
+			//Class.forName("com.mysql.jdbc.Driver").newInstance();
+			//Connection connection = DriverManager.getConnection(loginUrl,loginUser,loginPasswd);
+			
+			//P5 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			
+			Context initCtx = new InitialContext();
+
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            
+            // Look up our data source
+            DataSource ds = (DataSource) envCtx.lookup("jdbc/TestDB");
+			
+            Connection con=ds.getConnection();
+			
+            //P5~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		
 		
 			String query = "INSERT INTO sales (customerID, moviesID, saleDate) VALUES (?,?,?)";
 			
-			java.sql.PreparedStatement statement = connection.prepareStatement(query);
+			java.sql.PreparedStatement statement = con.prepareStatement(query);
 		
 			//set the values within the statement
 			statement.setObject(1, info.getCustomerId()); //add customerID
@@ -67,7 +84,7 @@ public class SaleActions {
 			
 			statement.setObject(3, new SimpleDateFormat("yyyy-mm-dd").format(date)); //add current date
 
-			connection.close();
+			con.close();
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

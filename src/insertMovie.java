@@ -8,11 +8,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 import helper.DBConnection;
 import helper.*;
@@ -44,11 +48,24 @@ public class insertMovie extends HttpServlet {
 		String genre=(String)request.getParameter("genre");
 			
 		
-		Connection con=DBConnection.getConnection();
+		//Connection con=DBConnection.getConnection();
 		Constants cons= new Constants();
 		
 		CallableStatement csmt;
 		try {
+			//P5 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			
+			Context initCtx = new InitialContext();
+
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            
+            // Look up our data source
+            DataSource ds = (DataSource) envCtx.lookup("jdbc/TestDB");
+			
+            Connection con=ds.getConnection();
+			
+            //P5~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		
 			csmt = con.prepareCall("{call add_movie(?,?,?,?,?,?)}");
 			csmt.setString("titles", name);
 			csmt.setInt("years", Integer.parseInt(year));
@@ -61,6 +78,9 @@ public class insertMovie extends HttpServlet {
 			out = csmt.getString(6);
 			response.sendRedirect("dashboard.jsp?found="+out);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

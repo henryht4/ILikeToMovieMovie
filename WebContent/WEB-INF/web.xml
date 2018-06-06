@@ -16,7 +16,8 @@
     <url-pattern>/login</url-pattern>
     <url-pattern>/dashboard</url-pattern>
   </servlet-mapping>
-  
+ 
+ 
   <resource-ref>
     <description>MySQL DataSource example</description>
     <res-ref-name>jdbc/moviedb</res-ref-name>
