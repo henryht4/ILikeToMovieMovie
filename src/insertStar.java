@@ -59,7 +59,7 @@ public class insertStar extends HttpServlet {
             Context envCtx = (Context) initCtx.lookup("java:comp/env");
             
             // Look up our data source
-            DataSource ds = (DataSource) envCtx.lookup("jdbc/TestDB");
+            DataSource ds = (DataSource) envCtx.lookup("jdbc/MasterDB");
 			
             Connection con=ds.getConnection();
 			
