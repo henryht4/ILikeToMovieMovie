@@ -8,11 +8,14 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 import helper.DBConnection;
 import helper.MovieListing;
@@ -55,13 +58,26 @@ public class StarServlet extends HttpServlet {
         out.println("<%@include file=\"navbar.jsp\" %>");
 
         try {
+        	//P5 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			
+			Context initCtx = new InitialContext();
+
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            
+            // Look up our data source
+            DataSource ds = (DataSource) envCtx.lookup("jdbc/TestDB");
+			
+            Connection con=ds.getConnection();
+			
+            //P5~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		
         		
         		// create database connection
-        		Connection connection = DBConnection.getConnection();
+        		//Connection connection = DBConnection.getConnection();
         		
         		// prepare query
         		String query = "SELECT * from stars where id=?";
-        		PreparedStatement pst=connection.prepareStatement(query);
+        		PreparedStatement pst=con.prepareStatement(query);
         		pst.setString(1, starId);
         		// execute query
         		ResultSet rst=pst.executeQuery();

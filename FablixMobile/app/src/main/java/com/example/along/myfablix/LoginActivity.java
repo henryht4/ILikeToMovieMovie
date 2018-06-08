@@ -15,6 +15,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -39,6 +41,8 @@ public class LoginActivity extends AppCompatActivity {
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
+
+
     public void login(View view) {
         if (mAuthTask != null) {
             return;
@@ -128,6 +132,7 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
 
+
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
@@ -144,11 +149,41 @@ public class LoginActivity extends AppCompatActivity {
         protected void onCancelled() {
             mAuthTask = null;
         }
+
+
     }
+    public void ToSearch(View view){
+        ArrayList<String> userList = new ArrayList<String>(Arrays.asList("a@email.com","b@email.com","c@email.com","d@email.com","e@email.com","f@email.com","g@email.com","h@email.com","i@email.com","j@email.com","k@email.com","l@email.com","m@email.com","n@email.com","o@email.com","p@email.com","q@email.com","r@email.com","s@email.com","t@email.com"));
+        ArrayList<String> passList = new ArrayList<String>(Arrays.asList("a2","b2","c2","d2","e2","f2","g2","h2","i2","j2","k2","l2","m2","n2","o2","p2","q2","r2","s2","t2"));
+
+
+        String email = emailEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+
+        boolean cancel = false;
+        View focusView = null;
+
+        if (TextUtils.isEmpty(email)) {
+            emailEditText.setError(getString(R.string.email_empty_error));
+            focusView = emailEditText;
+            cancel = true;
+        } else if (!isEmailValid(email)) {
+            emailEditText.setError(getString(R.string.email_error));
+            focusView = emailEditText;
+            cancel = true;
+        }else if(userList.contains(email) && passList.contains(password)){
+            Intent intent = new Intent(getApplicationContext(), MovieSearchActivity.class);
+            startActivity(intent);
+        }
+
+    }
+
 
     private boolean isEmailValid(String email)
     {
         return email.contains("@");
     }
 
+
 }
+

@@ -45,11 +45,11 @@
         android:hint="@string/password_text" />
 
     <Button
-        android:text="@string/login_button"
+        android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/loginButton"
-        android:gravity="center"
         android:layout_gravity="center_horizontal"
-        android:onClick="login" />
+        android:gravity="center"
+        android:onClick="ToSearch"
+        android:text="@string/login_button" />
 </LinearLayout>

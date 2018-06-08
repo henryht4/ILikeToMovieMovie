@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import javax.annotation.Resource;
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -83,12 +85,26 @@ public class SearchResults extends HttpServlet {
 
 
         try {
+        	
+        	//P5 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			
+			Context initCtx = new InitialContext();
+
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
+            
+            // Look up our data source
+            DataSource ds = (DataSource) envCtx.lookup("jdbc/TestDB");
+			
+            Connection con=ds.getConnection();
+			
+            //P5~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		
 
             // Create a new connection to database
-            Connection dbCon = dataSource.getConnection();
+            //Connection dbCon = dataSource.getConnection();
 
             // Declare a new statement
-            Statement statement = dbCon.createStatement();
+            Statement statement = con.createStatement();
 
             // Retrieve parameter "name" from the http request, which refers to the value of <input name="name"> in index.html
             String title = request.getParameter("title");
@@ -115,7 +131,7 @@ public class SearchResults extends HttpServlet {
              
                 //create genre statement
                 String ListOfGenres = "";
-                Statement GenreStatement = dbCon.createStatement();
+                Statement GenreStatement = con.createStatement();
                 
                 //Create Genre Query
         		String GenreQuery = String.format("select g.name from movies m, genres_in_movies gl, genres g where gl.genreId = g.id and gl.movieId = '%s' and m.id = '%s'",movieID,movieID);
@@ -131,7 +147,7 @@ public class SearchResults extends HttpServlet {
         		String ListOfStars = "";
         		
         		//create Stars Statement
-        		Statement StarsStatement = dbCon.createStatement();
+        		Statement StarsStatement = con.createStatement();
         		
         		//Create Star Query
         		String StarQuery = String.format("select s.name from movies m, stars_in_movies sl, stars s where sl.starId = s.id and sl.movieId = '%s' and m.id = '%s'",movieID,movieID);
@@ -161,7 +177,7 @@ public class SearchResults extends HttpServlet {
             // Close all structures
             rs.close();
             statement.close();
-            dbCon.close();
+            con.close();
 
         } catch (Exception ex) {
 
