@@ -26,7 +26,7 @@ import helper.LoginResponse;
 /**
  * Servlet implementation class LoginServletAndroid
  */
-@WebServlet("/LoginServletAndroid")
+@WebServlet(name = "LoginServletAndoid", urlPatterns = "/api/android-login")
 public class LoginServletAndroid extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

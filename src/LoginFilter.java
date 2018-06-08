@@ -41,7 +41,7 @@ public class LoginFilter implements Filter {
 
         return requestURI.endsWith("Login.java") || requestURI.endsWith("login.jsp") || requestURI.endsWith("index.jsp")
                 || requestURI.endsWith("/login") || requestURI.endsWith("style.css") || requestURI.endsWith("cart.png") 
-                || requestURI.endsWith("metadata.jsp");
+                || requestURI.endsWith("metadata.jsp") || requestURI.endsWith("Android");
     }
     
     public void init(FilterConfig fConfig) {
