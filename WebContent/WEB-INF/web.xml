@@ -108,6 +108,7 @@
     <servlet-name>insertMovie</servlet-name>
     <url-pattern>/insertMovie</url-pattern>
   </servlet-mapping>
+
   <!-- 
  <security-constraint>
  <web-resource-collection>
@@ -119,5 +120,6 @@
  </user-data-constraint>
 </security-constraint>
    -->
+
  
  </web-app>
