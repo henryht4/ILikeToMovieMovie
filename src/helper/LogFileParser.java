@@ -12,7 +12,7 @@ public class LogFileParser {
 			long totalTS = 0;
 			long totalTJ = 0;
 			int count = 0;
-			File file = new File("log.txt");
+			File file = new File("C:\\Users\\jenny\\Desktop\\CS 122B\\project\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp1\\wtpwebapps\\cs122b\\log.txt");
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			

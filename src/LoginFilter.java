@@ -25,12 +25,10 @@ public class LoginFilter implements Filter {
             return;
         }
         
-        // Redirect to login page if the "user" attribute doesn't exist in session
-        if (httpRequest.getSession().getAttribute("email") == null) {
-            httpResponse.sendRedirect("login.jsp");
-        } else {
+        
+        
             chain.doFilter(request, response);
-        }
+        
     }
     
     // Setup your own rules here to allow accessing some resources without logging in
@@ -40,8 +38,7 @@ public class LoginFilter implements Filter {
         requestURI = requestURI.toLowerCase();
 
         return requestURI.endsWith("Login.java") || requestURI.endsWith("login.jsp") || requestURI.endsWith("index.jsp")
-                || requestURI.endsWith("/login") || requestURI.endsWith("style.css") || requestURI.endsWith("cart.png") 
-                || requestURI.endsWith("metadata.jsp") || requestURI.endsWith("Android");
+                || requestURI.endsWith("/login") || requestURI.endsWith("style.css") || requestURI.endsWith("cart.png") ;
     }
     
     public void init(FilterConfig fConfig) {
