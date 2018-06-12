@@ -12,7 +12,7 @@ public class LogFileParser {
 			long totalTS = 0;
 			long totalTJ = 0;
 			int count = 0;
-			File file = new File("C:\\Users\\Henry\\Documents\\GitHub\\cs122b-spring18-team-120\\Reports\\ScaledNoCPS.txt");
+			File file = new File("C:\\Users\\Henry\\Documents\\GitHub\\cs122b-spring18-team-120\\Reports\\ScaledNoPS.txt");
 			
 			FileReader fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
