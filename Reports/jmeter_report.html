@@ -1,0 +1,125 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    background-color: linen;
+}
+
+td {
+    border-top-style: solid;
+}
+</style>
+</head>
+<body>
+
+<table style="width:100%">
+  <tr style="font-weight:bold; background-color: orange">
+    <td width="300px">Single-instance version cases</td>
+    <td>Graph Results Screenshot</td>
+    <td>Average Query Time(ms)</td>
+    <td>Average Search Servlet Time(ms) TS</td>
+    <td>Average JDBC Time(ms) TJ</td>
+    <td>Analysis</td>
+  </tr>
+  <tr>
+    <td>Case 1: HTTP/1 thread</td>
+    <td><img src="Single1T.png" alt="Graph Results Screenshot Case 1" style="width:304px;height:228px;"></td>
+    <td>23</td>
+    <td>14753102</td>
+    <td>2.43</td>
+    <td>--</td>
+  </tr>
+  <tr>
+    <td>Case 2: HTTP/10 threads</td>
+    <td><img src="Single10T.png" alt="Graph Results Screenshot Case 2" style="width:304px;height:228px;"></td>
+    <td>26</td>
+    <td>16725204</td>
+    <td>5.70</td>
+    <td>--</td>
+  </tr>
+  <tr>
+    <td>Case 3: HTTPS/10 threads</td>
+    <td><img src="Single10THTTPS.png" alt="Graph Results Screenshot Case 3" style="width:304px;height:228px;"></td>
+    <td>32</td>
+    <td>17242764</td>
+    <td>7.39</td>
+    <td>--</td>
+  </tr>
+  <tr>
+    <td>Case 4: HTTP/10 threads/No prepared statements</td>
+    <td><img src="graph_results_case4.png" alt="Graph Results Screenshot Case 4" style="width:304px;height:228px;"></td>
+    <td>??</td>
+    <td>??</td>
+    <td>??</td>
+    <td>--</td>
+  </tr>
+  <tr>
+    <td>Case 5: HTTP/10 threads/No connection pooling</td>
+    <td><img src="SingleNoCP.png" alt="Graph Results Screenshot Case 4" style="width:304px;height:228px;"></td>
+    <td>30</td>
+    <td>100317</td>
+    <td>8.57</td>
+    <td>--</td>
+  </tr>
+
+</table> 
+
+
+<table style="width:100%">
+  <tr style="font-weight:bold; background-color: orange">
+    <td width="300px">Scaled version cases</td>
+    <td>Graph Results Screenshot</td>
+    <td>Average Query Time(ms)</td>
+    <td>Average Search Servlet Time(ms)</td>
+    <td>Average JDBC Time(ms)</td>
+    <td>Analysis</td>
+  </tr>
+  <tr>
+    <td>Case 1: HTTP/1 thread</td>
+    <td><img src="Scaled1T.png" alt="Graph Results Screenshot Case 1" style="width:304px;height:228px;"></td>
+    <td>26</td>
+    <td>Average TS = 20176.788777017 seconds
+Average TJ = 0.002714325 seconds
+</td>
+    <td>Average TS = 91751.872281508 seconds
+Average TJ = 0.002759104 seconds</td>
+    <td>--</td>
+  </tr>
+  <tr>
+    <td>Case 2: HTTP/10 threads</td>
+    <td><img src="Scaled10T.png" alt="Graph Results Screenshot Case 2" style="width:304px;height:228px;"></td>
+    <td>26</td>
+    <td>Average TS = 20780.018984613 seconds
+Average TJ = 0.003122861 seconds
+</td>
+    <td>Average TS = 92355.079176902 seconds
+Average TJ = 0.003076115 seconds
+</td>
+    <td>--</td>
+  </tr>
+  <tr>
+    <td>Case 3: HTTP/10 threads/No prepared statements</td>
+    <td><img src="graph_results_case4.png" alt="Graph Results Screenshot Case 4" style="width:304px;height:228px;"></td>
+    <td>??</td>
+    <td>??</td>
+    <td>??</td>
+    <td>--</td>
+  </tr>
+  <tr>
+    <td>Case 4: HTTP/10 threads/No connection pooling</td>
+    <td><img src="ScaledNoCP.png" alt="Graph Results Screenshot Case 4" style="width:304px;height:228px;"></td>
+    <td>26</td>
+    <td>Average TS = 3.9185775 seconds
+Average TJ = 0.003429095 seconds
+</td>
+    <td>Average TS = 3.816844647 seconds
+Average TJ = 0.003757696 seconds
+</td>
+    <td>--</td>
+  </tr>
+
+</table> 
+
+</body>
+</html>
