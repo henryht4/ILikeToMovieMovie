@@ -1,8 +1,0 @@
-like-predicate.txt
-
-We use LIKE in SearchManager.java in the query we have used prepared statements
-to create the queries with whichever combination the users enters for the 
-search page. We add the '%' character before and after every piece of information
-so we can find if a title or name contains any part of the parameter. If a user
-does not enter any info for that parameter we insert '%%' which will then not
-use that parameter to search for titles.
